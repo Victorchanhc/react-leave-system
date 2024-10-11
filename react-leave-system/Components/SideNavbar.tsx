@@ -2,17 +2,14 @@
 
 import React from 'react';
 import { useState } from 'react';
-import { Button, Col, Form, Nav, Navbar, NavbarBrand, NavbarCollapse, NavbarToggle, NavDropdown, Offcanvas, OffcanvasBody, OffcanvasHeader, OffcanvasTitle, Row } from 'react-bootstrap';
+import { Nav, Navbar, NavDropdown, Offcanvas } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
-import Sidebar from './SideBar';
 
 export function SideNavbar() {
 
-  const [show, setShow] = useState(false)
-
   return (
     <>
-      <Navbar expand='lg' className="bg-body-tertiary">
+      <Navbar expand='lg' className="bg-primary">
         <Container fluid>
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} />
           <Navbar.Offcanvas
@@ -23,11 +20,11 @@ export function SideNavbar() {
           >
             <Offcanvas.Header closeButton>
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>
-                Offcanvas
+                Menu
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <Nav className="flex-column justify-content-start">
+              <Nav className="flex-column justify-content-start container-fluid pt-3 pe-0">
                 <Nav.Link href="#action1">Home</Nav.Link>
                 <Nav.Link href="#action2">Link</Nav.Link>
                 <NavDropdown
@@ -46,7 +43,7 @@ export function SideNavbar() {
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
-          <Navbar.Brand href="#">SouthTeen FC</Navbar.Brand>
+          <Navbar.Brand href="#" className='text-white '>SouthTeen FC</Navbar.Brand>
         </Container>
       </Navbar>
     </>
