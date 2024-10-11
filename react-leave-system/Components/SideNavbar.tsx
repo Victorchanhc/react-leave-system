@@ -1,7 +1,6 @@
 "use client"
 
 import React from 'react';
-import { useState } from 'react';
 import { Nav, Navbar, NavDropdown, Offcanvas } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 
@@ -16,7 +15,6 @@ export function SideNavbar() {
             id={`offcanvasNavbar-expand-lg`}
             aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
             placement="start" className="d-block d-lg-none" 
-            sm
           >
             <Offcanvas.Header closeButton>
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>

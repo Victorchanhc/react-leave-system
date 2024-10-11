@@ -4,8 +4,8 @@ import "./globals.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import { SideNavbar } from "../Components/SideNavbar";
-import SideBar from "../Components/SideBar";
+import { SideNavbar } from "../components/SideNavbar";
+import SideBar from "../components/SideBar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
