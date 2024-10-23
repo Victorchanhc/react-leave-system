@@ -1,6 +1,9 @@
+"use client"
+
+import { useRouter } from "next/navigation"
 
 interface LessonProps {
-    lessons: {
+    lesson: {
         id: number,
         name: string,
         date: string[],
@@ -11,12 +14,22 @@ interface LessonProps {
 }
 
 export function Lesson(props: LessonProps) {
+
+    const router = useRouter()
+
+    // const joinLesson = (id: number)=>{
+    //     router.push("/lesson/join")
+    // }
+
     return (
-        <div>
-            <h4>{props.lessons.name}</h4>
-            <div>{props.lessons.date}</div>
-            <div>{(props.lessons.startTime) + " - " + (props.lessons.endTime)}</div>
-            <div>{props.lessons.venue}</div>
-        </div>
+        <>
+            <div>
+                <h4>{props.lesson.name}</h4>
+                <div>{props.lesson.date}</div>
+                <div>{(props.lesson.startTime) + " - " + (props.lesson.endTime)}</div>
+                <div>{props.lesson.venue}</div>
+            </div>
+        </>
+        
     )
 }
