@@ -2,7 +2,6 @@
 
 import { Button, Collapse, FloatingLabel, Form } from "react-bootstrap";
 import { Lesson } from "./Lesson";
-import { ApplyLeaveCollapse } from "./ApplyLeaveCollapse";
 import { useState } from "react";
 
 

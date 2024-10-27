@@ -13,7 +13,7 @@ export default function SideBar() {
                     <Nav className="flex-column justify-content-start container-fluid pt-3 pe-0">
                         <Nav.Link href="/" className="navItem">Home</Nav.Link>
                         <Nav.Link href="/lesson" className="navItem">Lesson</Nav.Link>
-                        <Nav.Link href="#action3" className="navItem">My Account</Nav.Link>
+                        <Nav.Link href="/account" className="navItem">My Account</Nav.Link>
                         <Nav.Link href="#action4" className="navItem">Logout</Nav.Link>
                     </Nav>
                 </Offcanvas.Body>
