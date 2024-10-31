@@ -1,6 +1,8 @@
 "use client"
 
+import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { Card } from "react-bootstrap"
 
 interface LessonProps {
     lesson: {
@@ -23,13 +25,13 @@ export function Lesson(props: LessonProps) {
 
     return (
         <>
-            <div>
-                <h4>{props.lesson.name}</h4>
-                <div>{props.lesson.date}</div>
-                <div>{(props.lesson.startTime) + " - " + (props.lesson.endTime)}</div>
-                <div>{props.lesson.venue}</div>
-            </div>
+                <Card.Body>
+                    <Card.Title>{props.lesson.name}</Card.Title>
+                    <Card.Text>{props.lesson.date}</Card.Text>
+                    <Card.Text>{(props.lesson.startTime) + " - " + (props.lesson.endTime)}</Card.Text>
+                    <Card.Text>{props.lesson.venue}</Card.Text>
+                </Card.Body>
         </>
-        
+
     )
 }

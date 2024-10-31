@@ -25,11 +25,11 @@ export function AddNewParticipantCollapse() {
                     <FloatingLabel label='English Full Name' controlId='EnglishNameInput' className='mb-3 mx-4'>
                         <Form.Control type='text' placeholder='e.g. Chan Tai Man' required />
                     </FloatingLabel>
-                    <FloatingLabel label='Judy' controlId='NickNameInput' className='mb-3 mx-4'>
+                    <FloatingLabel label='Nick Name' controlId='NickNameInput' className='mb-3 mx-4'>
                         <Form.Control type='text' placeholder='e.g. Man Man/Marcus' required />
                     </FloatingLabel>
-                    <FloatingLabel label='陳晞妍' controlId='ChineseNameInput' className='mb-3 mx-4'>
-                        <Form.Control type='text' placeholder='e.g. 陳晞妍' required />
+                    <FloatingLabel label='Chinese Full Name' controlId='ChineseNameInput' className='mb-3 mx-4'>
+                        <Form.Control type='text' placeholder='e.g. 陳大文' required />
                     </FloatingLabel>
                     <FloatingLabel label='Date Of Birth' controlId='DateOfBirthInput' className='mb-3 mx-4'>
                         <Form.Control type='date' placeholder='e.g. 陳大文' datatype='date' required />
