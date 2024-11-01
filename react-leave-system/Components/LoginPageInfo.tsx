@@ -5,13 +5,13 @@ import googleLogo from "../pic/google.png"
 import clientLogo from "../pic/LOGO.png"
 import Image from "next/image"
 
-export function LoginPageInfo(){
+export function LoginPageInfo() {
 
-    return(
+    return (
         <div className="loginBGContainer d-flex justify-content-center align-items-center">
             <div className="loginContainer px-3 py-4 mt-4">
                 <div className="bandLogo-content container-fluid py-4 d-flex justify-content-center">
-                <Image src={clientLogo} width={150} height={160} alt="client-logo"/>
+                    <Image src={clientLogo} width={150} height={160} alt="client-logo" />
                 </div>
                 <Form>
                     <FloatingLabel label='Email Address' controlId='loginEmailInput' className='mb-3 mx-4'>
@@ -26,7 +26,7 @@ export function LoginPageInfo(){
                 </Form>
                 <div className="px-4">
                     <a href="/connect/google" className="btn btn-secondary container-fluid mb-3">
-                        <Image src={googleLogo} width={20} height={20} alt="google-logo"/>
+                        <Image src={googleLogo} width={20} height={20} alt="google-logo" className="me-2" />
                         Sign in With Google
                     </a>
                 </div>
@@ -34,11 +34,12 @@ export function LoginPageInfo(){
                     <button type="button" className="col btn active container-fluid" data-bs-toggle="button" aria-pressed="true">
                         Forget password</button>
                 </div>
-                <div className="register-content container-fluid px-4 mt-2">
+                <div className="register-content container-fluid px-4 mt-3">
                     Don't have an account ? Register now !
-                    <div id="registerButton" className="btn btn-outline-light btn-sm ">Register
-                        <i className="bi bi-arrow-right"></i>
-                    </div>
+                    <a href="/register" className="btn btn-outline-light btn-sm container-fluid my-2">
+
+                        Register
+                    </a>
 
                 </div>
             </div>

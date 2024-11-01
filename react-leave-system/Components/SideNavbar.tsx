@@ -3,6 +3,8 @@
 import React from 'react';
 import { Nav, Navbar, NavDropdown, Offcanvas } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
+import Image from 'next/image';
+import clientLogo from '../pic/LOGO.png'
 
 export function SideNavbar() {
 
@@ -14,7 +16,7 @@ export function SideNavbar() {
           <Navbar.Offcanvas
             id={`offcanvasNavbar-expand-lg`}
             aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
-            placement="start" className="d-block d-lg-none" 
+            placement="start" className="d-block d-lg-none"
           >
             <Offcanvas.Header closeButton>
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>
@@ -41,7 +43,9 @@ export function SideNavbar() {
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
-          <Navbar.Brand href="#" className='text-white '>SouthTeen FC</Navbar.Brand>
+          <Navbar.Brand href="/" className='text-white fw-bold fs-4'>
+            <Image src={clientLogo} width={60} height={60} alt="client-logo" className='me-3'/>
+            SouthTeen FC</Navbar.Brand>
         </Container>
       </Navbar>
     </>

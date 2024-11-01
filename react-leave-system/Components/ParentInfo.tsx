@@ -19,7 +19,7 @@ export function ParentInfo() {
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Parent Email</Form.Label>
-                            <Form.Control type="text" defaultValue={`abc@gmail.com`} disabled={edit} />
+                            <Form.Control type="text" plaintext readOnly defaultValue={`abc@gmail.com`} disabled={edit} />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Parent Contact Number</Form.Label>
