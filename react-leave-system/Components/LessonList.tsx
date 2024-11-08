@@ -22,9 +22,6 @@ export function LessonList(props: LessonListProps) {
 
     return (
         <div>
-            <h1 className="text-center mt-3 ">
-                Welcome to STFC
-            </h1>
             <div className="participantContainer">
                 <div className="lessonContent">
                     <Row className="d-inline-flex justify-content-between container-fluid px-5 ">

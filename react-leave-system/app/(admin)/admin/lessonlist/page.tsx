@@ -1,13 +1,16 @@
 
-import { LessonList } from "../../../components/LessonList";
+import { AdminLessonList } from "../../../../AdminComponents/AdminLessonList";
+import { AddNewLessonCollapse } from "../../../../AdminComponents/AddNewLessonCollapse";
 
-export default function LessonPage() {
+
+export default function lessonList(){
+    
 
     const lessons = [
         {
             id: 1,
             name: "星期日 上午 荃灣",
-            date: ["5/12", "13/12", "20/12"],
+            date: ["2024/12/05"],
             startTime: "11:30",
             endTime: "13:00",
             venue: "城門谷五人場"
@@ -38,13 +41,15 @@ export default function LessonPage() {
         }
     ]
 
-   
-    return (
+    return(
         <div>
-            <h1 className="text-center mt-3 ">
-                Welcome to STFC
-            </h1>
-            <LessonList lessons={lessons} />
+            <div className="ms-3 mt-3">
+                <h1 className="fw-bold">Lesson List</h1>
+            </div>
+            <div>
+                <AdminLessonList lessons={lessons}/>
+                <AddNewLessonCollapse />
+            </div>
         </div>
-    );
+    )
 }
