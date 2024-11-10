@@ -1,5 +1,5 @@
 import { Accordion, Card } from "react-bootstrap"
-import { AttendantLessonCollapse } from "./AttendantLessonCollapse"
+import { AttendantLessonAccordion} from "./AttendantLessonAccordion"
 
 
 interface AttendantLessonProps {
@@ -26,7 +26,7 @@ export function AttendantLessonList(props :AttendantLessonProps){
                     {props.attendantDatas.map((attendantData, idx) => (
                         <Accordion key={idx} className="mx-2 p-2 mb-2">
                             {/* add the lesson to collapse for easily to control the edit button at the end of card */}
-                            <AttendantLessonCollapse attendantData={attendantData} />
+                            <AttendantLessonAccordion attendantData={attendantData} />
                         </Accordion>
                     ))}
                 </div>

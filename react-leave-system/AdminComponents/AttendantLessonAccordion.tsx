@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Accordion, Button, Card, Collapse, FloatingLabel, Form, FormCheck, FormControl, Table } from "react-bootstrap"
 import { AdminLesson } from "./AdminLesson"
+import { IconCalendarEvent, IconClockHour3, IconUserFilled } from "@tabler/icons-react"
 
 interface AttendantLessonProps {
     attendantData: {
@@ -19,10 +20,7 @@ interface AttendantLessonProps {
 }
 
 
-export function AttendantLessonCollapse(props: AttendantLessonProps) {
-
-    const [open, setOpen] = useState(false)
-    const [edit, setEdit] = useState(true)
+export function AttendantLessonAccordion(props: AttendantLessonProps) {
 
     return (
         <>
@@ -37,10 +35,10 @@ export function AttendantLessonCollapse(props: AttendantLessonProps) {
                     <Accordion>
                         <Accordion.Item eventKey="0-1">
                             <Accordion.Header>
-                                <div className="d-flex">
-                                    <div>{props.attendantData.date}</div>
-                                    <div>{props.attendantData.startTime}-{props.attendantData.endTime}</div>
-                                    <div>3</div>
+                                <div className="container-fluid d-flex justify-content-between align-items-center">
+                                    <div className="d-flex align-items-center"><IconCalendarEvent/>{props.attendantData.date}</div>
+                                    <div className="d-flex align-items-center"><IconClockHour3/>{props.attendantData.startTime}-{props.attendantData.endTime}</div>
+                                    <div className="d-flex align-items-center"><IconUserFilled/>3</div>
                                 </div>
                             </Accordion.Header>
                             <Accordion.Body>
