@@ -14,7 +14,7 @@ export default function SideBar() {
                         <Nav.Link href="/" className="navItem">Home</Nav.Link>
                         <Nav.Link href="/lesson" className="navItem">Lesson</Nav.Link>
                         <Nav.Link href="/account" className="navItem">My Account</Nav.Link>
-                        <Nav.Link href="#action4" className="navItem">Logout</Nav.Link>
+                        <Nav.Link href="/#" className="navItem">Logout</Nav.Link>
                     </Nav>
                 </Offcanvas.Body>
             </Navbar.Offcanvas>
