@@ -14,20 +14,20 @@ exports.seed = async function (knex) {
             username: 'superAdmin',
             phone: '64099717',
             email: 'admin@southteenfc.com',
-            password: '123456',
+            password: '$2a$10$kLDK6WBhBZE70NIDi4azl.LljSF/huyZo7P21Epd1vLNJCedCJb16',
             role: 'ADMIN'
         },
         {
             username: 'test1',
             phone: '64800144',
             email: 'test1@gmail.com',
-            password: '112233'
+            password: '$2a$10$jzh7E/mJVjCihlorWPEJPuXEvTL9xh7RtOdoa03yUHsqPdAIBBFSy'
         },
         {
             username: 'test2',
             phone: '55964745',
             email: 'test2@gmail.com',
-            password: '223344'
+            password: '$2a$10$yjcXXSHDvrJ45joVGk1EVOZFGJsv/ZKjr15.7YPv6E4AKSobrmuyq'
         }
     ]);
 
