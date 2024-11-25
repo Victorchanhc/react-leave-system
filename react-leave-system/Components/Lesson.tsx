@@ -2,21 +2,17 @@
 
 import { useRouter } from "next/navigation"
 import { Card } from "react-bootstrap"
+import { HomePageDetail, Lessons, Players } from "../services/models"
 
 interface LessonProps {
-    lesson: {
-        id: number,
-        name: string,
-        date: string[],
-        startTime: string,
-        endTime: string,
-        venue: string
-    }
+    lessons:Lessons
 }
 
 export function Lesson(props: LessonProps) {
 
     const router = useRouter()
+
+
 
     // const joinLesson = (id: number)=>{
     //     router.push("/lesson/join")
@@ -25,10 +21,11 @@ export function Lesson(props: LessonProps) {
     return (
         <>
                 <Card.Body>
-                    <Card.Title>{props.lesson.name}</Card.Title>
-                    <Card.Text>{props.lesson.date}</Card.Text>
-                    <Card.Text>{(props.lesson.startTime) + " - " + (props.lesson.endTime)}</Card.Text>
-                    <Card.Text>{props.lesson.venue}</Card.Text>
+                    <Card.Title className="mb-3">Next Lesson : </Card.Title>
+                    <Card.Text className="font-weight-bold">{props.lessons.lesson_name}</Card.Text>
+                    <Card.Text>Date : {props.lessons.date}</Card.Text>
+                    <Card.Text>Time : {(props.lessons.start_time.substring(0,5)) + " - " + (props.lessons.end_time.substring(0,5))}</Card.Text>
+                    <Card.Text>Venue : {props.lessons.venue}</Card.Text>
                 </Card.Body>
         </>
 

@@ -1,3 +1,4 @@
+const { arrayBuffer } = require("node:stream/consumers");
 
 
 /**
@@ -18,7 +19,7 @@ exports.up = async function(knex) {
   await knex.schema.createTable("lessons",table=>{
     table.increments()
     table.text("lesson_name").notNullable()
-    table.date("date").notNullable()
+    table.text("date").notNullable()
     table.time("start_time").notNullable()
     table.time("end_time").notNullable()
     table.text("venue").notNullable()
@@ -30,7 +31,7 @@ exports.up = async function(knex) {
     table.text("english_name").notNullable()
     table.text("nick_name").notNullable()
     table.text("chinese_name")
-    table.date("date_of_birth").notNullable()
+    table.text("date_of_birth").notNullable()
     table.text("gender").notNullable()
     table.integer("parent_id").notNullable().unsigned()
     table
