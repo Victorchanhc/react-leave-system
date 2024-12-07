@@ -1,14 +1,14 @@
 'use client'
 
 import { Button, Collapse, FloatingLabel, Form } from "react-bootstrap";
-import { useEffect, useState } from "react";
-import { LessonDetail, UserDetails } from "../services/models";
+import { useState } from "react";
+import { AllDetails, courseDetail } from "../services/models";
 import { Lesson } from "./Lesson";
 import { IconUserFilled } from "@tabler/icons-react";
 
 interface UserDetailsProps {
-    userDetails: UserDetails[],
-    lessonDetails: LessonDetail[]
+    allDetails: AllDetails[],
+    courseDetails: courseDetail[]
 }
 
 
@@ -16,81 +16,89 @@ interface UserDetailsProps {
 export function HomeInfo(props: UserDetailsProps) {
 
     const [open, setOpen] = useState(null);
-    const [info, setInfo] = useState({ ...props.userDetails[0] })
+    const info = { ...props.allDetails[0] }
 
     const toggleCollapse = (id) => {
         setOpen(open === id ? null : id)
     }
-    const defaultLessonsByPlayer = info.players.map(player => {
-        const defaultLessons = player.lessons.filter(lesson => lesson.status === 'DEFAULT');
-        return { ...player, defaultLessons }; // 返回玩家和他们的DEFAULT课程
-    }).filter(player => player.defaultLessons.length > 0); // 只保留有DEFAULT课程的玩家
+    // const defaultLessonsByPlayer = info.players.map(player => {
+    //     const defaultLessons = player.lessons.filter(lesson => lesson.status === 'DEFAULT');
+    //     return { ...player, defaultLessons };
+    // }).filter(player => player.defaultLessons.length > 0); 
 
-    const pendingLessonsByPlayer = info.players.map(player => {
-        const pendingLessons = player.lessons.filter(lesson => lesson.status === 'PENDING');
-        return { ...player, pendingLessons }; // 返回玩家和他们的PENDING课程
-    }).filter(player => player.pendingLessons.length > 0); // 只保留有PENDING课程的玩家
+    // const pendingLessonsByPlayer = info.players.map(player => {
+    //     const pendingLessons = player.lessons.filter(lesson => lesson.status === 'PENDING');
+    //     return { ...player, pendingLessons }; 
+    // }).filter(player => player.pendingLessons.length > 0);
 
+    // const alllesson = props.lessonDetails.map(alllesson => {
+    //         const pendingLessons = alllesson.lessons.map
+    //         return { ...alllesson, pendingLessons }; 
+    //     })
+    
 
-    // console.log(info.players[1].lessons)
-    // console.log(defaultLessonsByPlayer[1].defaultLessons)
-    // console.log(pendingLessonsByPlayer[0].pendingLessons)
+    // console.log(props.courseDetails[0].lesson_date.toISOString().split("T")[0])
 
     return (
         <>
-            {defaultLessonsByPlayer.map((defaultPlayer, defaultPlayerIdx) => (
-                <div key={defaultPlayerIdx} className="participantContent m-4">
-                    <h2 ><IconUserFilled></IconUserFilled> {defaultPlayer.nick_name}</h2>
-                    <div className="participantLessonContainer border rounded">
-                        <div className="participantLessonInfoContent p-3 d-flex justify-content-between align-items-center">
-                            <div className="lessonInfoContent" >
-                                <Lesson lessons={defaultPlayer.defaultLessons[0]} />
+            {info.students.map((student, studentIdx) => (
+                <div key={studentIdx} className="participantContent m-4">
+                    <h2 ><IconUserFilled></IconUserFilled> {student.nick_name}</h2>
+                    {student.courses.map((course, courseIdx) => (
+                        <div key={courseIdx} className="participantLessonContainer border rounded">
+                            <div className="participantLessonInfoContent p-3 d-flex justify-content-between align-items-center">
+                                <div className="lessonInfoContent" >
+                                    <h6 className="mb-3">Next Lesson :</h6>
+                                    <h5 className="mb-3">{course.course_name}</h5>
+                                    <Lesson lessons={course.lessons[0]} />
+                                </div>
+                                <Button
+                                    variant="outline-dark"
+                                    onClick={() => { toggleCollapse(student.id); }}
+                                    aria-controls={student.english_name}
+                                    aria-expanded={open === student.id}
+                                >
+                                    Apply Leave
+                                </Button>
                             </div>
-                            <Button
-                                variant="outline-dark"
-                                onClick={() => { toggleCollapse(defaultPlayer.id); }}
-                                aria-controls={defaultPlayer.english_name}
-                                aria-expanded={open === defaultPlayer.id}
-                            >
-                                Apply Leave
-                            </Button>
+                            <div>
+                                <Collapse in={open === student.id}>
+                                    <Form>
+                                        <FloatingLabel label='Original Training Date' controlId="OriginalTrainingDateInput" className="mb-3 mx-4">
+                                            <Form.Select aria-label="Select..." required>
+                                                <option disabled>Select one...</option>
+                                                {course.lessons.map((lesson, lessonIdx) => (
+                                                    <option key={lessonIdx} value={lesson.id}>{course.course_name} --- {lesson.venue} --- {lesson.lesson_date} --- {lesson.start_time.substring(0, 5)} - {lesson.end_time.substring(0, 5)}</option>
+                                                ))}
+                                            </Form.Select>
+                                        </FloatingLabel>
+                                        <FloatingLabel label='Request Training Date' controlId="RequestTrainingDateInput" className="mb-3 mx-4">
+                                            <Form.Select aria-label="Select..." required>
+                                                <option disabled>Select one...</option>
+                                                {props.courseDetails.map((course, courseIdx) => (
+                                                    <option key={courseIdx} value={course.id}>{course.name} --- {course.venue} --- {course.lesson_date.toISOString().split("T")[0]} --- {course.start_time.substring(0, 5)} - {course.end_time.substring(0, 5)}</option>
+                                                
+                                                ))}
+                                                </Form.Select>
+                                        </FloatingLabel>
+                                        <FloatingLabel label='Reason' controlId="ReasonTrainingDateInput" className="mb-3 mx-4">
+                                            <Form.Select aria-label="Select..." required>
+                                                <option disabled>Select one...</option>
+                                                <option value={'病假'}>病假</option>
+                                                <option value={'事假'}>事假</option>
+                                            </Form.Select>
+                                        </FloatingLabel>
+                                        <Form.Group className='mb-4 mx-4'>
+                                            <Button type='submit' className='container-fluid'> Submit</Button>
+                                        </Form.Group>
+                                    </Form>
+                                </Collapse>
+                            </div>
                         </div>
-                        <div>
-                            <Collapse in={open === defaultPlayer.id}>
-                                <Form>
-                                    <FloatingLabel label='Original Training Date' controlId="OriginalTrainingDateInput" className="mb-3 mx-4">
-                                        <Form.Select aria-label="Select..." required>
-                                            <option disabled>Select one...</option>
-                                            {defaultPlayer.defaultLessons.map((playerLesson, idx) => (
-                                                <option key={idx} value={playerLesson.id}>{playerLesson.lesson_name} --- {playerLesson.date} --- {playerLesson.start_time.substring(0, 5)} - {playerLesson.end_time.substring(0, 5)}</option>
-                                            ))}
-                                        </Form.Select>
-                                    </FloatingLabel>
-                                    <FloatingLabel label='Request Training Date' controlId="RequestTrainingDateInput" className="mb-3 mx-4">
-                                        <Form.Select aria-label="Select..." required>
-                                            <option disabled>Select one...</option>
-                                            {props.lessonDetails.map((lessonDetail, lessonIdx) => (
-                                                <option key={lessonIdx} value={lessonDetail.id}>{lessonDetail.lesson_name} --- {lessonDetail.date} --- {lessonDetail.start_time.substring(0, 5)} - {lessonDetail.end_time.substring(0, 5)}</option>
-                                            ))}
-                                        </Form.Select>
-                                    </FloatingLabel>
-                                    <FloatingLabel label='Reason' controlId="ReasonTrainingDateInput" className="mb-3 mx-4">
-                                        <Form.Select aria-label="Select..." required>
-                                            <option disabled>Select one...</option>
-                                            <option value={'病假'}>病假</option>
-                                            <option value={'事假'}>事假</option>
-                                        </Form.Select>
-                                    </FloatingLabel>
-                                    <Form.Group className='mb-4 mx-4'>
-                                        <Button type='submit' className='container-fluid'> Submit</Button>
-                                    </Form.Group>
-                                </Form>
-                            </Collapse>
-                        </div>
-                    </div>
+                    ))}
                 </div>
             ))}
-            {pendingLessonsByPlayer.length === 0 ? (
+            {/* {pendingLessonsByPlayer.length === 0 ? (
                 <div></div>
             ) :
                 (<>
@@ -110,7 +118,7 @@ export function HomeInfo(props: UserDetailsProps) {
                 </>
                 )
 
-            }
+            } */}
 
         </>
     )

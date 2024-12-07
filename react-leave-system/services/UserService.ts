@@ -1,82 +1,124 @@
 import { Knex } from "knex";
 import { User } from "./models";
 import { knex } from "./knex";
-import { sessionStore, SessionStore } from "./SessionStore";
+import { hashPassword } from "./bcrypt";
+// import { sessionStore, sessionStore } from "./SessionStore";
 
 
-export class UserService{
+export class UserService {
 
-    constructor (private knex:Knex){
-        
+    constructor(private knex: Knex) {
+
     }
 
-    async getUser(email:string):Promise<User>{
+    async getUser(email: string): Promise<User> {
         return (await this.knex.select('*')
             .from('users')
             .where('email', email)
         )[0]
     }
 
-    async getLesson(){
-        return this.knex.select('*').from('lessons')
+    async getSelectCourses() {
+        return this.knex('courses').select('*')
+        .leftJoin('course_lessons','course_lessons.course_id','courses.id')
+        .groupBy('courses.id','course_lessons.id')
+        .orderBy('courses.id','course_lessons.id')
     }
 
-    async userGetLessons(id:number){
+    async getCourses() {
+        const result = await knex('courses')
+            .select('courses.id AS course_id', 'name AS course_name', 'description')
+            .select(
+                knex.raw(
+                    `COALESCE(
+                        json_agg(
+                            json_build_object(
+                                'id',course_lessons.id,
+                                'lesson_date',course_lessons.lesson_date,
+                                'start_time',course_lessons.start_time,
+                                'end_time',course_lessons.end_time,
+                                'venue',course_lessons.venue
+                            )
+                        ),'[]'
+                        )AS lessons`
+                )
+            ).leftJoin('course_lessons','course_lessons.course_id','courses.id')
+            .groupBy('courses.id')
+
+            return result
+    }
+
+    async parentGetLessons(id: number) {
         const result = await knex('users')
-            .select('users.id AS userID', 'username', 'phone', 'email')
+            .select('users.id AS user_id', 'username', 'phone', 'email')
             .select(
                 knex.raw(`COALESCE(
-                json_agg(
-                  json_build_object(
-                    'id', players.id,
-                    'english_name' , players.english_name,
-                    'nick_name' , players.nick_name,
-                    'chinese_name' , players.chinese_name,
-                    'date_of_birth' , players.date_of_birth,
-                    'gender' , players.gender,
-                    'lessons', COALESCE(
-                      (SELECT 
-                         json_agg(
-                           json_build_object(
-                             'id', lessons.id,
-                             'lesson_name', lessons.lesson_name,
-                             'date', lessons.date,
-                             'venue', lessons.venue,
-                             'start_time', lessons.start_time,
-                             'end_time' , lessons.end_time,
-                             'status', participants.status,
-                             'reason', participants.reason
-                           )
-                         )
-                       FROM participants
-                       JOIN lessons ON lessons.id = participants.lesson_id
-                       WHERE participants.player_id = players.id
-                      ), '[]'
-                    )
-                  )
-                ) FILTER (WHERE players.id IS NOT NULL), '[]'
-              ) AS players`)
-            ).leftJoin('players', 'players.parent_id', 'users.id')
-  .groupBy('users.id')
-  .where('users.id',id);
+                    json_agg(
+                        json_build_object(
+                            'id', students.id,
+                            'english_name' , students.english_name,
+                            'nick_name' , students.nick_name,
+                            'chinese_name' , students.chinese_name,
+                            'date_of_birth' , students.date_of_birth,
+                            'gender' , students.gender,
+                            'courses', COALESCE(
+                                (SELECT 
+                                    json_agg(
+                                        json_build_object(
+                                            'course_id', courses.id,
+                                            'course_name', courses.name,
+                                            'description', courses.description,
+                                            'lessons', COALESCE(
+                                                (SELECT
+                                                    json_agg(
+                                                        json_build_object(
+                                                        'id', course_lessons.id,
+                                                        'lesson_date', course_lessons.lesson_date,
+                                                        'start_time', course_lessons.start_time,
+                                                        'end_time', course_lessons.end_time,
+                                                        'venue', course_lessons.venue,
+                                                        'canceled_reason', course_lessons.canceled_reason
+                                                        )
+                                                    )
+                                                    FROM course_lessons
+                                                    WHERE course_lessons.course_id = courses.id
+                                                ),'[]'
+                                            )
+                                        )
+                                    )
+                                    FROM enrollments
+                                    JOIN courses ON courses.id = enrollments.course_id
+                                    WHERE enrollments.student_id = students.id
+                                ),'[]'
+                            )
+                        )ORDER BY students.id 
+                    )FILTER (WHERE students.id IS NOT NULL), '[]'
+                    )  AS students `)
+            
+            ).leftJoin('students', 'students.user_id', 'users.id')
+            .groupBy('users.id')
+            .where('users.id', id);
 
-  return result
+        return result
     }
 
-    async userFetchLessons(id:number){
-        return this.knex.select(
-            'participants.id','participants.lesson_id',
-            'participants.player_id','participants.status',
-            'lessons.lesson_name','lessons.date',
-            'lessons.start_time','lessons.end_time','lessons.venue',
-            'players.english_name','players.nick_name').from('lessons')
-            .innerJoin('participants','lessons.id','participants.lesson_id')
-            .innerJoin('players','players.id','participants.player_id')
-            .where('players.parent_id',id)
-            
+    async createUser(data){
+        const password = await hashPassword(data.password)
+        return knex.insert({
+            username : data.username,
+            phone : data.phone,
+            email : data.email,
+            password : password
+        }).into('users')
+    }
 
-        // select * from lessons inner join participants on lessons.id = participants.lesson_id inner join players on players.id = participants.player_id where players.parent_id = (select users.id from users where users.email = );
-
+    async updateUser(id:number, username:string, phone:string){
+        return knex('users').where('users.id','=',id).update(
+            {
+                username : username,
+                phone : phone
+            }
+        )
     }
 }
 

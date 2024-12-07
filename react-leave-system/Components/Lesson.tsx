@@ -2,13 +2,13 @@
 
 import { useRouter } from "next/navigation"
 import { Card } from "react-bootstrap"
-import { HomePageDetail, Lessons, Players } from "../services/models"
+import { lesson } from "../services/models"
 
-interface LessonProps {
-    lessons:Lessons
+interface lessonProps {
+    lessons: lesson
 }
 
-export function Lesson(props: LessonProps) {
+export function Lesson(props: lessonProps) {
 
     const router = useRouter()
 
@@ -21,10 +21,9 @@ export function Lesson(props: LessonProps) {
     return (
         <>
                 <Card.Body>
-                    <Card.Title className="mb-3">Next Lesson : </Card.Title>
-                    <Card.Text className="font-weight-bold">{props.lessons.lesson_name}</Card.Text>
-                    <Card.Text>Date : {props.lessons.date}</Card.Text>
-                    <Card.Text>Time : {(props.lessons.start_time.substring(0,5)) + " - " + (props.lessons.end_time.substring(0,5))}</Card.Text>
+                    {/* <Card.Title className="mb-3">{props.lesson.}</Card.Title> */}
+                    <Card.Text>Date : {props.lessons.lesson_date}</Card.Text>
+                    <Card.Text>Time : {(props.lessons.start_time) + " - " + (props.lessons.end_time)}</Card.Text>
                     <Card.Text>Venue : {props.lessons.venue}</Card.Text>
                 </Card.Body>
         </>

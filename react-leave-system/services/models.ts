@@ -9,56 +9,67 @@ export interface User {
     role: string
 }
 
-export interface LessonDetail {
+export interface courseDetail {
     id: number,
-    lesson_name : string,
-    date: string,
+    name: string,
+    description: string,
+    created_at?: string,
+    updated_at?: string,
+    course_id: number,
+    lesson_date: Date,
     start_time: string,
     end_time: string,
-    venue: string
+    venue: string,
+    is_canceled: boolean,
+    canceled_reason?: string
 }
 
 
-export interface UserDetails {
+export interface AllDetails {
 
-        userId : number,
-        username : string,
-        phone : string,
-        email : string,
-        players : Players[]
-        // id: number,
-        // lesson_id: number,
-        // player_id: number,
-        // status: string,
-        // lesson_name: string,
-        // date: string,
-        // start_time: string,
-        // end_time: string,
-        // venue: string,
-        // english_name: string,
-        // nick_name: string
+    user_id: number,
+    username: string,
+    phone: string,
+    email: string,
+    students: Students[]
+    // id: number,
+    // lesson_id: number,
+    // player_id: number,
+    // status: string,
+    // lesson_name: string,
+    // date: string,
+    // start_time: string,
+    // end_time: string,
+    // venue: string,
+    // english_name: string,
+    // nick_name: string
+}
+
+export interface Students {
+    id: number,
+    english_name: string,
+    nick_name: string,
+    chinese_name: string,
+    date_of_birth: string,
+    gender: string,
+    courses: Courses[],
+    // defaultLessons?: Lessons[],
+    // pendingLessons?: Lessons[]
+}
+
+export interface Courses {
+    course_id: number,
+    course_name: string,
+    description: string,
+    lessons?: lesson[]
     }
 
-    export interface Players {
-        id : number,
-        english_name : string,
-        nick_name : string,
-        chinese_name : string,
-        date_of_birth : string,
-        gender : string,
-        lessons : Lessons [],
-        defaultLessons? : Lessons [],
-        pendingLessons? : Lessons []
-    }
-
-    export interface Lessons {
-        id : number,
-        lesson_name : string,
-        date : string,
-        start_time : string,
-        end_time : string,
-        venue :  string,
-        status : string,
-        reason : string
-    }
+export interface lesson {
+    id: number,
+    lesson_date: string,
+    start_time: string,
+    end_time: string,
+    venue: string,
+    canceled_reason?: string
+}
 

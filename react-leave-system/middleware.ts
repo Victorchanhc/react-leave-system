@@ -5,6 +5,8 @@ const isRouteWithoutMiddleware = (path:string)=>{
     const excludedPrefix = [
         "/login",
         "/api/login",
+        "/register",
+        "/api/user",
         "/_next/static",
         "/favicon.ico"
     ]

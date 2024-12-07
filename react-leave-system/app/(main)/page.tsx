@@ -7,9 +7,9 @@ export default async function Home() {
 
   const user = await sessionStore.get()
 
-  const userDetails = await userService.userGetLessons(user.id)
+  const allDetails = await userService.parentGetLessons(user.id)
 
-  const lessonDetails = await userService.getLesson()
+  const courseDetails = await userService.getSelectCourses()
 
   // console.log({...homePageDetails[0]})
 
@@ -20,7 +20,7 @@ export default async function Home() {
         Welcome to STFC
       </h1>
       <div className="participantContainer">
-        <HomeInfo userDetails={userDetails} lessonDetails = {lessonDetails}/>
+        <HomeInfo allDetails={allDetails} courseDetails = {courseDetails}/>
       </div>
     </div>
   );

@@ -2,17 +2,18 @@
 
 import { Fragment } from "react";
 import { Form } from "react-bootstrap";
+import { AllDetails } from "../services/models";
 
 interface ParticipantSelectProps {
-    participant: {
-        name: string
-    }
+    allDetails: AllDetails []
+    
 }
 
 export function ParticipantSelect(props: ParticipantSelectProps) {
 
-    console.log(props.participant.name)
-
+    const students = props.allDetails[0].students
+    
+    // console.log(students)
     return (
         <Form className="container-fluid">
             <Form.Check type="checkbox" id={`${props.participant.name}`} >

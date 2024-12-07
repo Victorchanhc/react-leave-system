@@ -1,10 +1,16 @@
 import { Button, Card } from "react-bootstrap";
 import { ParentInfo } from "../../../components/ParentInfo";
-import { ParticipantInfo } from "../../../components/ParticipantInfo";
+import { ParticipantInfo, ParticipantInfoList } from "../../../components/ParticipantInfoList";
 import { AddNewParticipantCollapse } from "../../../components/AddNewParticipantCollapse";
+import { sessionStore } from "../../../services/SessionStore";
+import { userService } from "../../../services/UserService";
 
 
-export default function MyAccountPage() {
+export default async function MyAccountPage() {
+
+    const user = await sessionStore.get()
+
+    const allDetails = await userService.parentGetLessons(user.id)
 
     return (
         <div>
@@ -16,13 +22,13 @@ export default function MyAccountPage() {
                     </div>
                 </div>
                 <div className="mb-4">
-                    <ParentInfo />
+                    <ParentInfo allDetails={allDetails}/>
                 </div>
                 <div className="mb-2">
                     <h2>Participant</h2>
                 </div>
                 <div className="mb-2">
-                    <ParticipantInfo />
+                    <ParticipantInfoList allDetails={allDetails}/>
                 </div>
                 <div className="border border-dark rounded mb-2 p-2 ">
                     <AddNewParticipantCollapse />
