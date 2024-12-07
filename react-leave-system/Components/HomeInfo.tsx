@@ -47,7 +47,7 @@ export function HomeInfo(props: UserDetailsProps) {
                 <div key={studentIdx} className="participantContent m-4">
                     <h2 ><IconUserFilled></IconUserFilled> {student.nick_name}</h2>
                     {student.courses.map((course, courseIdx) => (
-                        <div key={courseIdx} className="participantLessonContainer border rounded">
+                        <div key={courseIdx} className="participantLessonContainer border rounded mb-2">
                             <div className="participantLessonInfoContent p-3 d-flex justify-content-between align-items-center">
                                 <div className="lessonInfoContent" >
                                     <h6 className="mb-3">Next Lesson :</h6>
@@ -103,7 +103,7 @@ export function HomeInfo(props: UserDetailsProps) {
                         </div>
                     }
                 {student.reschedule.length !== 0 && 
-                <div className="pt-3">
+                <div className="pt-2">
                     <h2>Request</h2>
                     {student.reschedule.map((reschedule, rescheduleIdx)=>(
                         <div key={rescheduleIdx} className="d-flex justify-content-between align-items-center border rounded py-4 px-3">
