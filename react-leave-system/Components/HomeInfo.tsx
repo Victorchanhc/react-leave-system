@@ -98,7 +98,7 @@ export function HomeInfo(props: UserDetailsProps) {
                     ))}
                     {student.courses.length === 0 &&
                     <div className="participantLessonContainer border rounded py-4">
-                        <a href="/lesson" className="m-3"> Join Lesson Now ! </a>
+                        <a href="/lesson" className="m-3">Click me to join lesson now ! </a>
                     </div>
                     }
                 </div>

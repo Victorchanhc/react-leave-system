@@ -30,14 +30,14 @@ export default async function JoinLessonIDPage(props: JoinLessonProps) {
 
     return (
         <div className="container-fluid">
-            <div className="d-flex mx-3">
+            <div className="d-flex m-3">
                 <a href="/lesson" className="mx-3 align-self-center font-weight-bold"><IconArrowLeft></IconArrowLeft></a>
                 
                 <h1>Join Lesson</h1>
             </div>
             <JoinLesson course={course} allDetails={userDetails} />
             <div className="border border-dark rounded mx-3 mb-2 p-2 ">
-                <AddNewParticipantCollapse />
+                <AddNewParticipantCollapse user_id={user.id}/>
             </div>
         </div>
     )
