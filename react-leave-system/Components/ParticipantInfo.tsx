@@ -28,14 +28,13 @@ export function ParticipantInfo(props: studentProps) {
 
     const student = props.student
     const [edit, setEdit] = useState(true)
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<FormState>()
+    const { register, handleSubmit, watch, formState: { errors }, reset } = useForm<FormState>()
 
     async function submit(data: FormState) {
         console.log(data)
         await updateStudent(data)
-        console.log("complete")
-        await router.refresh()
-        console.log("refreshed")
+        router.refresh()
+        setEdit(!edit)
 
     }
 

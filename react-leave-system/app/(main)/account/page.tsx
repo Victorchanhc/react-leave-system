@@ -31,7 +31,7 @@ export default async function MyAccountPage() {
                     <ParticipantInfoList allDetails={allDetails}/>
                 </div>
                 <div className="border border-dark rounded mb-2 p-2 ">
-                    <AddNewParticipantCollapse />
+                    <AddNewParticipantCollapse user_id={user.id}/>
                 </div>
 
             </div>
