@@ -1,6 +1,6 @@
 import { Button, Card } from "react-bootstrap";
 import { ParentInfo } from "../../../components/ParentInfo";
-import { ParticipantInfo, ParticipantInfoList } from "../../../components/ParticipantInfoList";
+import { ParticipantInfoList } from "../../../components/ParticipantInfoList";
 import { AddNewParticipantCollapse } from "../../../components/AddNewParticipantCollapse";
 import { sessionStore } from "../../../services/SessionStore";
 import { userService } from "../../../services/UserService";

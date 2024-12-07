@@ -53,6 +53,7 @@ export interface Students {
     date_of_birth: string,
     gender: string,
     courses: Courses[],
+    reschedule: Reschedule []
     // defaultLessons?: Lessons[],
     // pendingLessons?: Lessons[]
 }
@@ -66,10 +67,19 @@ export interface Courses {
 
 export interface lesson {
     id: number,
+    course_name? : string
     lesson_date: string,
     start_time: string,
     end_time: string,
     venue: string,
     canceled_reason?: string
+}
+
+export interface Reschedule {
+    id: number,
+    original_lesson : lesson[],
+    new_lesson : lesson[],
+    reason : string,
+    status : string
 }
 

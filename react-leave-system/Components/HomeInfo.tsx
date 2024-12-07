@@ -4,7 +4,7 @@ import { Button, Collapse, FloatingLabel, Form } from "react-bootstrap";
 import { useState } from "react";
 import { AllDetails, courseDetail } from "../services/models";
 import { Lesson } from "./Lesson";
-import { IconUserFilled } from "@tabler/icons-react";
+import { IconArrowBigRightFilled, IconUserFilled } from "@tabler/icons-react";
 
 interface UserDetailsProps {
     allDetails: AllDetails[],
@@ -14,6 +14,8 @@ interface UserDetailsProps {
 
 
 export function HomeInfo(props: UserDetailsProps) {
+
+    console.log(props.allDetails[0].students[0].reschedule[0])
 
     const [open, setOpen] = useState(null);
     const info = { ...props.allDetails[0] }
@@ -35,7 +37,7 @@ export function HomeInfo(props: UserDetailsProps) {
     //         const pendingLessons = alllesson.lessons.map
     //         return { ...alllesson, pendingLessons }; 
     //     })
-    
+
 
     // console.log(props.courseDetails[0].lesson_date.toISOString().split("T")[0])
 
@@ -49,7 +51,6 @@ export function HomeInfo(props: UserDetailsProps) {
                             <div className="participantLessonInfoContent p-3 d-flex justify-content-between align-items-center">
                                 <div className="lessonInfoContent" >
                                     <h6 className="mb-3">Next Lesson :</h6>
-                                    <h5 className="mb-3">{course.course_name}</h5>
                                     <Lesson lessons={course.lessons[0]} />
                                 </div>
                                 <Button
@@ -68,7 +69,7 @@ export function HomeInfo(props: UserDetailsProps) {
                                             <Form.Select aria-label="Select..." required>
                                                 <option disabled>Select one...</option>
                                                 {course.lessons.map((lesson, lessonIdx) => (
-                                                    <option key={lessonIdx} value={lesson.id}>{course.course_name} --- {lesson.venue} --- {lesson.lesson_date} --- {lesson.start_time.substring(0, 5)} - {lesson.end_time.substring(0, 5)}</option>
+                                                    <option key={lessonIdx} value={lesson.id}>{lesson.course_name} --- {lesson.venue} --- {lesson.lesson_date} --- {lesson.start_time.substring(0, 5)} - {lesson.end_time.substring(0, 5)}</option>
                                                 ))}
                                             </Form.Select>
                                         </FloatingLabel>
@@ -77,9 +78,9 @@ export function HomeInfo(props: UserDetailsProps) {
                                                 <option disabled>Select one...</option>
                                                 {props.courseDetails.map((course, courseIdx) => (
                                                     <option key={courseIdx} value={course.id}>{course.name} --- {course.venue} --- {course.lesson_date.toISOString().split("T")[0]} --- {course.start_time.substring(0, 5)} - {course.end_time.substring(0, 5)}</option>
-                                                
+
                                                 ))}
-                                                </Form.Select>
+                                            </Form.Select>
                                         </FloatingLabel>
                                         <FloatingLabel label='Reason' controlId="ReasonTrainingDateInput" className="mb-3 mx-4">
                                             <Form.Select aria-label="Select..." required>
@@ -97,12 +98,35 @@ export function HomeInfo(props: UserDetailsProps) {
                         </div>
                     ))}
                     {student.courses.length === 0 &&
-                    <div className="participantLessonContainer border rounded py-4">
-                        <a href="/lesson" className="m-3">Click me to join lesson now ! </a>
-                    </div>
+                        <div className="participantLessonContainer border rounded py-4">
+                            <a href="/lesson" className="m-3">Click me to join lesson now ! </a>
+                        </div>
                     }
+                {student.reschedule.length !== 0 && 
+                <div className="pt-3">
+                    <h2>Request</h2>
+                    {student.reschedule.map((reschedule, rescheduleIdx)=>(
+                        <div key={rescheduleIdx} className="d-flex justify-content-between align-items-center border rounded py-4 px-3">
+                            <div className="px-3">
+                                <Lesson lessons={reschedule.original_lesson[0]}/>
+                            </div>
+                            <div>{reschedule.status}</div>
+                            <IconArrowBigRightFilled/>
+                            <div className="px-3">
+                                <Lesson lessons={reschedule.new_lesson[0]}/>
+                            </div>
+                        </div>
+                    ))}
                 </div>
+                }
+                </div>
+                
+
+
+
             ))}
+
+            { }
             {/* {pendingLessonsByPlayer.length === 0 ? (
                 <div></div>
             ) :
