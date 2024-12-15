@@ -9,7 +9,6 @@ type DeleteConfirmationModelProps = {
     onHide:()=>void
 }
 
-
 export function DeleteConfirmationModel(props:DeleteConfirmationModelProps) {
 
     return (

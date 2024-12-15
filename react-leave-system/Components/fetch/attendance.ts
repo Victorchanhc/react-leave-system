@@ -1,5 +1,4 @@
 export async function updateAttendance(data){
-    console.log("get in fetch")
     await fetch(`/api/attendance`, {
         method : "PUT",
         headers : {

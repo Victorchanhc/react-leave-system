@@ -4,11 +4,9 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FloatingLabel, Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
 import Collapse from 'react-bootstrap/Collapse';
 import { useForm } from 'react-hook-form';
 import { createStudent } from './fetch/student';
-import { headers } from 'next/headers';
 
 interface userIdProps {
     user_id : number
@@ -29,20 +27,15 @@ export function AddNewParticipantCollapse(props:userIdProps) {
 
     const [open, setOpen] = useState(false);
 
-    const { register, handleSubmit, watch, formState: { errors },reset } = useForm<FormState>()
+    const { register, handleSubmit, formState: { errors },reset } = useForm<FormState>()
 
     async function submit(data: FormState) {
-        console.log(data)
-        const create = await createStudent(data)
-        console.log("complete")
+        await createStudent(data)
         setOpen(!open)
         reset()
-        await router.refresh()
-        
-        console.log("refreshed")
+        router.refresh()
 
     }
-    // headers()
     return (
         <>
             <Button

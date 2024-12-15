@@ -9,7 +9,6 @@ export async function createReschedule(data){
 }
 
 export async function updateReschedule(id:number){
-    console.log("get in fetch")
     await fetch(`/api/reschedule`, {
         method : "PUT",
         headers : {

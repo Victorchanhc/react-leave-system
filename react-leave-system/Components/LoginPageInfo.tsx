@@ -1,6 +1,6 @@
 "use client"
 
-import { Alert, Button, FloatingLabel, Form, FormGroup } from "react-bootstrap";
+import { Alert, Button, FloatingLabel, Form } from "react-bootstrap";
 import googleLogo from "../pic/google.png"
 import clientLogo from "../pic/LOGO.png"
 import Image from "next/image"
@@ -20,7 +20,6 @@ export function LoginPageInfo() {
         e.preventDefault()
         const res = await login(email, password)
 
-        console.log(res)
         if (res === "PARENT") {
             router.push('/')
         }else if (res === "ADMIN"){

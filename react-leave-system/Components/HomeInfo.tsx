@@ -9,18 +9,12 @@ import { ApplyLeaveCollapse } from "./ApplyLeaveCollapse";
 import  styles  from "../app/(main)/leave.module.scss"
 import cx from 'classnames'
 
-
-
 interface UserDetailsProps {
     allDetails: AllDetails[],
     courseDetails: courseDetail[]
 }
 
-
-
 export function HomeInfo(props: UserDetailsProps) {
-
-    // console.log(props.courseDetails)
 
     const [open, setOpen] = useState(null);
     const info = { ...props.allDetails[0] }
@@ -32,23 +26,6 @@ export function HomeInfo(props: UserDetailsProps) {
     const onCompleteApply = async ()=>{
         setOpen(null)
     }
-    // const defaultLessonsByPlayer = info.players.map(player => {
-    //     const defaultLessons = player.lessons.filter(lesson => lesson.status === 'DEFAULT');
-    //     return { ...player, defaultLessons };
-    // }).filter(player => player.defaultLessons.length > 0); 
-
-    // const pendingLessonsByPlayer = info.players.map(player => {
-    //     const pendingLessons = player.lessons.filter(lesson => lesson.status === 'PENDING');
-    //     return { ...player, pendingLessons }; 
-    // }).filter(player => player.pendingLessons.length > 0);
-
-    // const alllesson = props.lessonDetails.map(alllesson => {
-    //         const pendingLessons = alllesson.lessons.map
-    //         return { ...alllesson, pendingLessons }; 
-    //     })
-
-
-    // console.log(props.courseDetails[0].lesson_date.toISOString().split("T")[0])
 
     return (
         <>
@@ -113,29 +90,6 @@ export function HomeInfo(props: UserDetailsProps) {
 
 
             ))}
-
-            { }
-            {/* {pendingLessonsByPlayer.length === 0 ? (
-                <div></div>
-            ) :
-                (<>
-                    <div className="m-4">
-                        <h1 className="text-danger">PENDING</h1>
-                        {pendingLessonsByPlayer.map((player, playerIdx) => (
-                            <div key={playerIdx} className="border rounded p-3">
-                                <h3>{player.nick_name}</h3>
-                                <div>{player.pendingLessons.map((pendingLesson, lessonIdx) => (
-                                    <div key={lessonIdx}>
-                                        <Lesson lessons={pendingLesson}></Lesson>
-                                    </div>
-                                ))}</div>
-                            </div>
-                        ))}
-                    </div>
-                </>
-                )
-
-            } */}
 
         </>
     )

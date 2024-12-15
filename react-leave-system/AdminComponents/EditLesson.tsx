@@ -1,9 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { Button, Col, Collapse, FloatingLabel, Form, FormControl, FormGroup, Row, Table } from "react-bootstrap"
-import { AdminLesson } from "./AdminLesson"
-import { Courses, lesson } from "../services/models"
+import { Button, Col, Form, FormGroup, Row } from "react-bootstrap"
+import { lesson } from "../services/models"
 import { deleteLesson, updateLesson } from "../components/fetch/lesson"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
@@ -37,10 +36,8 @@ export function EditLesson(props: AdminLessonProps) {
         }
     })
 
-
     const [edit, setEdit] = useState(true)
     const [show, setShow] = useState(false)
-
 
     async function submit(data: FormState) {
         console.log(data)

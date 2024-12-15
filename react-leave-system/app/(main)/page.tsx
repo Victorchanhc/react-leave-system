@@ -11,9 +11,6 @@ export default async function Home() {
 
   const courseDetails = await userService.getSelectCourses()
 
-  // console.log({...homePageDetails[0]})
-
-  
   return (
     <div>
       <h1 className="text-center mt-3 ">

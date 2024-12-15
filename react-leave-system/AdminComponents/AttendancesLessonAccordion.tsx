@@ -1,12 +1,8 @@
 "use client"
 
-import { Accordion, Button, Col, Form, FormGroup, Row } from "react-bootstrap"
+import { Accordion, Col, Row } from "react-bootstrap"
 import { IconCalendarEvent, IconClockHour3, IconUserFilled } from "@tabler/icons-react"
 import { Courses } from "../services/models"
-import FormCheckLabel from 'react-bootstrap/FormCheckLabel'
-import { Controller, useForm } from "react-hook-form"
-import { useState } from "react"
-import { updateAttendance } from "../components/fetch/attendance"
 import { useRouter } from "next/navigation"
 import { AttendanceForm } from "./AttendanceForm"
 
@@ -14,30 +10,9 @@ interface AttendantLessonProps {
     courseList: Courses
 }
 
-
-
 export function AttendantLessonAccordion(props: AttendantLessonProps) {
 
     const router = useRouter()
-
-    // console.log(props.courseList.lessons[0])
-    
-
-    // const value = props.courseList.lessons.flatMap((lesson) =>
-    //     lesson.attendance.map((att) => ({
-    //         attendance_id: att.attendance_id,
-    //         attended: att.attended || false,
-    //     }))
-    // )
-    // console.log(value)
-
-    
-    // 傳送到後端的 API
-    // fetch('/api/attendance', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(attendance),
-    // });
 
     return (
         <>
@@ -65,10 +40,7 @@ export function AttendantLessonAccordion(props: AttendantLessonProps) {
                                         <div>No match record</div>
                                         :
                                         <>
-                                        {/* <>{console.log(lesson)}</> */}
-                                        {/* <>{console.log(lesson.attendance)}</> */}
-                                            
-                                                    <AttendanceForm attendanceStudent={lesson.attendance}/>
+                                            <AttendanceForm attendanceStudent={lesson.attendance} />
                                         </>
                                     }
                                 </Accordion.Body>

@@ -1,9 +1,7 @@
 'use client'
-import { Button, Card, Col, Row } from "react-bootstrap";
-import { Lesson } from "./Lesson";
-import { useRouter } from "next/navigation";
+import { Card, Col, Row } from "react-bootstrap";
 import Link from "next/link";
-import { Courses, Lessons } from "../services/models";
+import { Courses } from "../services/models";
 
 interface LessonListProps {
     courses : Courses[]
@@ -11,12 +9,6 @@ interface LessonListProps {
 
 
 export function LessonList(props: LessonListProps) {
-
-    const router = useRouter()
-
-    // console.log(props.courses[0])
-
-    // console.log(...props.courses)
 
     return (
         <div>
@@ -31,7 +23,6 @@ export function LessonList(props: LessonListProps) {
                                     <Card.Subtitle>{course.lessons[0].venue}</Card.Subtitle>
                                     <Card.Text>{course.lessons[0].start_time} - {course.lessons[0].end_time}</Card.Text>
                                     <Card.Text>{course.description}</Card.Text>
-                                    {/* <Lesson lessons={lesson} /> */}
                                         <Link className="btn btn-primary btn-sm mt-2" href={`/lesson/join/${course.course_id}`}>Join</Link>
                                     </Card.Body>
 

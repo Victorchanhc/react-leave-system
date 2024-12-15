@@ -1,10 +1,8 @@
 'use client'
 
-import { useState } from "react"
-import { FloatingLabel, Form, FormSelect } from "react-bootstrap";
+import { FloatingLabel, Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import Collapse from 'react-bootstrap/Collapse'
-import { AllDetails, courseDetail, Courses, Students } from "../services/models";
+import { courseDetail, Courses, Students } from "../services/models";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { createReschedule } from "./fetch/reschedule";
@@ -30,11 +28,10 @@ export function ApplyLeaveCollapse(props:ApplyLeaveProps) {
     const { register, handleSubmit, watch, formState: { errors }, reset } = useForm<FormState>()
     
     async function submit(data: FormState) {
-        console.log(data)
         await createReschedule(data)
         props.onComplete()
         router.refresh()
-        reset
+        reset()
     }
 
     return (
@@ -49,7 +46,7 @@ export function ApplyLeaveCollapse(props:ApplyLeaveProps) {
                                 {ori_lesson.course_name} --- 
                                 {ori_lesson.venue} --- 
                                 {ori_lesson.lesson_date} --- 
-                                {ori_lesson.start_time.substring(0, 5)} - {ori_lesson.end_time.substring(0, 5)}
+                                {ori_lesson.start_time?.substring(0, 5)} - {ori_lesson.end_time?.substring(0, 5)}
                             </option>
                         ))}
                     </Form.Select>
@@ -61,8 +58,8 @@ export function ApplyLeaveCollapse(props:ApplyLeaveProps) {
                             <option key={new_lessonIdx}  value={new_lesson.id}>
                                 {new_lesson.name} --- 
                                 {new_lesson.venue} --- 
-                                {new_lesson.lesson_date.toISOString().split("T")[0]} --- 
-                                {new_lesson.start_time.substring(0, 5)} - {new_lesson.end_time.substring(0, 5)}
+                                {new_lesson.lesson_date?.toISOString().split("T")[0]} --- 
+                                {new_lesson.start_time?.substring(0, 5)} - {new_lesson.end_time?.substring(0, 5)}
                             </option>
 
                         ))}

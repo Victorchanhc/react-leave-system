@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation"
 import { Alert, Button, Card, Form } from "react-bootstrap"
-import { AllDetails, Courses, lesson } from "../services/models"
+import { AllDetails, Courses } from "../services/models"
 import { useForm } from "react-hook-form"
 import { createEnrollment } from "./fetch/enrollment"
 
@@ -25,17 +25,12 @@ export function JoinLesson(props: DetailsProps) {
     const { register, handleSubmit, watch, formState: { errors }, reset } = useForm<FormState>()
 
     async function submit(data: FormState) {
-        console.log(data)
         await createEnrollment(data)
         reset
         router.push("/")
 
     }
-
-    // const joinLesson = (id: number)=>{
-    //     router.push("/lesson/join")
-    // }
-
+    
     return (
         <>
             <div className="d-flex border justify-content-between rounded mx-3 mb-2 p-3 bg-light">

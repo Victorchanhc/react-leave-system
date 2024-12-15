@@ -17,10 +17,7 @@ interface JoinLessonProps {
 export default async function JoinLessonIDPage(props: JoinLessonProps) {
 
     const id = props.params.id
-    const q = props.searchParams.q
     const user = await sessionStore.get()
-
-    console.log(id)
 
     const userDetails = await userService.parentGetLessons(user.id)
 

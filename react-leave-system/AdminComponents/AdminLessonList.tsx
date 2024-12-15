@@ -1,12 +1,8 @@
 "use client"
 
-import Link from "next/link";
-import { Button, Card, Col, Collapse, FloatingLabel, Form, Row } from "react-bootstrap";
-import { AdminLesson } from "./AdminLesson";
+import { Card } from "react-bootstrap";
 import { EditLessonCollapse } from "./EditLessonCollapse";
-import { useState } from "react";
 import { Courses } from "../services/models";
-import { headers } from "next/headers";
 
 interface coursesListProps {
     courses : Courses[]

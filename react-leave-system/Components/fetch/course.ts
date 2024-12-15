@@ -9,7 +9,6 @@ export async function createCourse(data){
 }
 
 export async function updateCourse(data){
-    console.log("get in fetch")
     await fetch(`/api/course`, {
         method : "PUT",
         headers : {

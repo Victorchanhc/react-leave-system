@@ -2,7 +2,6 @@
 
 import { Card } from "react-bootstrap"
 import { lesson } from "../services/models"
-import { redirect } from "next/dist/server/api-utils"
 import  styles  from "../app/(main)/leave.module.scss"
 
 

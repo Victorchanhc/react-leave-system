@@ -9,7 +9,6 @@ export async function createLesson(data){
 }
 
 export async function updateLesson(data){
-    console.log("get in fetch")
     await fetch(`/api/lesson`, {
         method : "PUT",
         headers : {

@@ -9,8 +9,6 @@ export async function createEnrollment(data){
 }
 
 export async function updateEnrollment(data){
-    console.log("get in fetch")
-    console.log(data)
     await fetch(`/api/enrollment`, {
         method : "PUT",
         headers : {

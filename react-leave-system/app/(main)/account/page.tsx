@@ -1,4 +1,4 @@
-import { Button, Card } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { ParentInfo } from "../../../components/ParentInfo";
 import { ParticipantInfoList } from "../../../components/ParticipantInfoList";
 import { AddNewParticipantCollapse } from "../../../components/AddNewParticipantCollapse";

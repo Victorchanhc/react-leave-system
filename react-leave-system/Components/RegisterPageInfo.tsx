@@ -1,10 +1,8 @@
 "use client"
 
 import { Alert, Button, FloatingLabel, Form } from "react-bootstrap";
-import Image from "next/image"
 import { useForm } from "react-hook-form";
 import { createUser } from "./fetch/user";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 interface FormState {
@@ -24,7 +22,6 @@ export function RegisterPageInput() {
     const password = watch("password")
 
     async function submit(data: FormState) {
-        console.log(data)
         await createUser(data)
         console.log("complete")
         router.push("/")
@@ -35,7 +32,6 @@ export function RegisterPageInput() {
         <div className="loginBGContainer d-flex justify-content-center align-items-center">
             <div className="loginContainer px-3 py-4 mt-4">
                 <div className="bandLogo-content container-fluid py-4 d-flex justify-content-center">
-                    {/* <Image src={clientLogo} width={150} height={160} alt="client-logo"/> */}
                 </div>
                 <Form onSubmit={handleSubmit(submit)}>
                     <FloatingLabel label='Username' controlId='usernameInput' className='mb-3 mx-4'>

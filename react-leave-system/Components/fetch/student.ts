@@ -9,8 +9,6 @@ export async function createStudent(data){
 }
 
 export async function updateStudent(data){
-    console.log("get in fetch")
-    console.log(data)
     await fetch(`/api/student`, {
         method : "PUT",
         headers : {

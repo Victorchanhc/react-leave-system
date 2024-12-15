@@ -1,9 +1,7 @@
 "use client"
 import { IconEdit } from "@tabler/icons-react";
 import { FormEvent, useState } from "react";
-import { Button, Card, Form, FormControl, FormGroup, InputGroup } from "react-bootstrap";
-import { userService } from "../services/UserService";
-import { sessionStore } from "../services/SessionStore";
+import { Button, Card, Form } from "react-bootstrap";
 import { AllDetails } from "../services/models";
 import { updateUser } from "./fetch/user";
 import { useRouter } from "next/navigation";
@@ -22,7 +20,6 @@ export function ParentInfo(props: AllDetailsProps) {
     const user_id = detail.user_id
 
     const router = useRouter()
-
 
     const onSubmit = async (e: FormEvent) => {
         e.preventDefault()

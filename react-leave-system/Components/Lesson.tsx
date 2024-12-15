@@ -1,6 +1,5 @@
 "use client"
 
-import { useRouter } from "next/navigation"
 import { Card } from "react-bootstrap"
 import { lesson } from "../services/models"
 
@@ -9,14 +8,6 @@ interface lessonProps {
 }
 
 export function Lesson(props: lessonProps) {
-
-    const router = useRouter()
-
-
-
-    // const joinLesson = (id: number)=>{
-    //     router.push("/lesson/join")
-    // }
 
     return (
         <>

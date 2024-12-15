@@ -2,7 +2,7 @@
 
 import { IconArrowBadgeRightFilled } from "@tabler/icons-react";
 import { Button, Card, Col, Row } from "react-bootstrap";
-import { lesson, Reschedule } from "../services/models";
+import { lesson } from "../services/models";
 import { Lesson } from "./Lesson";
 import { updateReschedule } from "./fetch/reschedule";
 import { useRouter } from "next/navigation";
@@ -26,13 +26,10 @@ export function AdminHomeInfo(props: RequestLeaveProps) {
     const router = useRouter()
 
     const onApprove = async (id:number)=>{
-        console.log(id)
         await updateReschedule(id)
         router.refresh()
 
     }
-
-    console.log(props.requests)
 
     return (
         <>

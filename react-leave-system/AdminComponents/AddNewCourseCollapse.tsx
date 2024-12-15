@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FloatingLabel, Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
 import Collapse from 'react-bootstrap/Collapse';
 import { useForm } from 'react-hook-form';
 import { createCourse } from '../components/fetch/course';
@@ -21,7 +20,7 @@ export function AddNewLessonCollapse() {
 
     const router = useRouter()
 
-    const { register, handleSubmit, watch, formState: { errors }, reset } = useForm<FormState>()
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<FormState>()
 
     async function submit(data: FormState) {
         console.log(data)

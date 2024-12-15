@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react';
-import { Nav, Navbar, NavDropdown, Offcanvas } from 'react-bootstrap';
+import { Navbar, Offcanvas } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Image from 'next/image';
 import clientLogo from '../pic/LOGO.png'
