@@ -1,18 +1,11 @@
 import { AdminHomeInfo } from "../../../components/AdminHomeInfo";
+import { rescheduleService } from "../../../services/RescheduleService";
 
 
 
-export default function AdminPage() {
+export default async function AdminPage() {
 
-    const requests = [
-        {
-            name: "Jacko",
-            originLesson: "星期日 下午 荃灣",
-            requestLesson: "星期六 下午 荃灣",
-            status: "PENDING",
-            reason: "天雨取消"
-        }
-    ]
+    const requests = await rescheduleService.getReschedule()
 
     return (
         <div>

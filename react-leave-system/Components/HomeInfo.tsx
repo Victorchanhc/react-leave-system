@@ -5,6 +5,11 @@ import { useState } from "react";
 import { AllDetails, courseDetail } from "../services/models";
 import { Lesson } from "./Lesson";
 import { IconArrowBigRightFilled, IconUserFilled } from "@tabler/icons-react";
+import { ApplyLeaveCollapse } from "./ApplyLeaveCollapse";
+import  styles  from "../app/(main)/leave.module.scss"
+import cx from 'classnames'
+
+
 
 interface UserDetailsProps {
     allDetails: AllDetails[],
@@ -15,13 +20,17 @@ interface UserDetailsProps {
 
 export function HomeInfo(props: UserDetailsProps) {
 
-    console.log(props.allDetails[0].students[0].reschedule[0])
+    // console.log(props.courseDetails)
 
     const [open, setOpen] = useState(null);
     const info = { ...props.allDetails[0] }
 
     const toggleCollapse = (id) => {
         setOpen(open === id ? null : id)
+    }
+
+    const onCompleteApply = async ()=>{
+        setOpen(null)
     }
     // const defaultLessonsByPlayer = info.players.map(player => {
     //     const defaultLessons = player.lessons.filter(lesson => lesson.status === 'DEFAULT');
@@ -64,35 +73,9 @@ export function HomeInfo(props: UserDetailsProps) {
                             </div>
                             <div>
                                 <Collapse in={open === student.id}>
-                                    <Form>
-                                        <FloatingLabel label='Original Training Date' controlId="OriginalTrainingDateInput" className="mb-3 mx-4">
-                                            <Form.Select aria-label="Select..." required>
-                                                <option disabled>Select one...</option>
-                                                {course.lessons.map((lesson, lessonIdx) => (
-                                                    <option key={lessonIdx} value={lesson.id}>{lesson.course_name} --- {lesson.venue} --- {lesson.lesson_date} --- {lesson.start_time.substring(0, 5)} - {lesson.end_time.substring(0, 5)}</option>
-                                                ))}
-                                            </Form.Select>
-                                        </FloatingLabel>
-                                        <FloatingLabel label='Request Training Date' controlId="RequestTrainingDateInput" className="mb-3 mx-4">
-                                            <Form.Select aria-label="Select..." required>
-                                                <option disabled>Select one...</option>
-                                                {props.courseDetails.map((course, courseIdx) => (
-                                                    <option key={courseIdx} value={course.id}>{course.name} --- {course.venue} --- {course.lesson_date.toISOString().split("T")[0]} --- {course.start_time.substring(0, 5)} - {course.end_time.substring(0, 5)}</option>
-
-                                                ))}
-                                            </Form.Select>
-                                        </FloatingLabel>
-                                        <FloatingLabel label='Reason' controlId="ReasonTrainingDateInput" className="mb-3 mx-4">
-                                            <Form.Select aria-label="Select..." required>
-                                                <option disabled>Select one...</option>
-                                                <option value={'病假'}>病假</option>
-                                                <option value={'事假'}>事假</option>
-                                            </Form.Select>
-                                        </FloatingLabel>
-                                        <Form.Group className='mb-4 mx-4'>
-                                            <Button type='submit' className='container-fluid'> Submit</Button>
-                                        </Form.Group>
-                                    </Form>
+                                <div>
+                                    <ApplyLeaveCollapse onComplete={()=>{onCompleteApply()}} student={student} course={course} courseDetails={props.courseDetails}/>
+                                </div>
                                 </Collapse>
                             </div>
                         </div>
@@ -106,11 +89,16 @@ export function HomeInfo(props: UserDetailsProps) {
                 <div className="pt-2">
                     <h2>Request</h2>
                     {student.reschedule.map((reschedule, rescheduleIdx)=>(
-                        <div key={rescheduleIdx} className="d-flex justify-content-between align-items-center border rounded py-4 px-3">
+                        <div key={rescheduleIdx} className="d-flex justify-content-between align-items-center border rounded py-4 px-3 mb-2">
                             <div className="px-3">
                                 <Lesson lessons={reschedule.original_lesson[0]}/>
                             </div>
-                            <div>{reschedule.status}</div>
+                            {reschedule.status === "APPROVED" ?
+                            <div className={cx(styles.greenText, "fw-bold")}>{reschedule.status}</div>
+                            :
+                            <div className={cx(styles.dangerText, "fw-bold")}>{reschedule.status}</div>
+                            }
+                            
                             <IconArrowBigRightFilled/>
                             <div className="px-3">
                                 <Lesson lessons={reschedule.new_lesson[0]}/>

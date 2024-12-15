@@ -5,28 +5,23 @@ import { Button, Card, Col, Collapse, FloatingLabel, Form, Row } from "react-boo
 import { AdminLesson } from "./AdminLesson";
 import { EditLessonCollapse } from "./EditLessonCollapse";
 import { useState } from "react";
+import { Courses } from "../services/models";
+import { headers } from "next/headers";
 
-interface LessonListProps {
-    lessons: {
-        id: number,
-        name: string,
-        date: string[],
-        startTime: string,
-        endTime: string,
-        venue: string
-    }[]
+interface coursesListProps {
+    courses : Courses[]
 }
 
-export function AdminLessonList(props: LessonListProps) {
+export function AdminLessonList(props: coursesListProps) {
 
     return (
         <div>
             <div className="participantContainer">
                 <div className="lessonContent container-fluid">
-                    {props.lessons.map((lesson, idx) => (
-                        <Card key={idx} className="mx-2 p-2 mb-2">
+                    {props.courses.map((course, coursesIdx) => (
+                        <Card key={coursesIdx} className="mx-2 p-2 mb-2">
                             {/* add the lesson to collapse for easily to control the edit button at the end of card */}
-                            <EditLessonCollapse lesson={lesson}/>
+                            <EditLessonCollapse course={course}/>
                         </Card>
                     ))}
                 </div>

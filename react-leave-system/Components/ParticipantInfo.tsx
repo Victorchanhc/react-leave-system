@@ -34,6 +34,7 @@ export function ParticipantInfo(props: studentProps) {
         console.log(data)
         await updateStudent(data)
         router.refresh()
+        reset
         setEdit(!edit)
 
     }

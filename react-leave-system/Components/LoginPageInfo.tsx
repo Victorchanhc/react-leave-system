@@ -31,12 +31,12 @@ export function LoginPageInfo() {
     }
     return (
         <>
-            <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+            {show && <Alert variant="danger" onClose={() => setShow(false)} dismissible>
                 <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
                 <p>
                     Please put in correct Email and Password !
                 </p>
-            </Alert>
+            </Alert>}
             <div className="loginBGContainer d-flex justify-content-center align-items-center">
                 <div className="loginContainer px-3 py-4 mt-4">
                     <div className="bandLogo-content container-fluid py-4 d-flex justify-content-center">

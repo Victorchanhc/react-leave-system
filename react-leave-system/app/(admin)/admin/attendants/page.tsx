@@ -1,4 +1,7 @@
-import { AttendantLessonList } from "../../../../AdminComponents/AttendantLessonList";
+import { AttendantLessonList } from "../../../../AdminComponents/AttendancesLessonList";
+import { adminCourseService } from "../../../../services/AdminCourseService";
+
+
 
 const attendantDatas = [
     {
@@ -47,14 +50,17 @@ const attendantDatas = [
     }
 ]
 
-export default function attendants(){
+export default async function attendants(){
+
+    const attendances = await adminCourseService.adminGetAttendants()
+
     return(
         <div>
             <div className="ms-3 mt-3">
                 <h1 className="fw-bold">Attendants</h1>
             </div>
             <div>
-                <AttendantLessonList attendantDatas={attendantDatas}/>
+                <AttendantLessonList attendances={attendances}/>
             </div>
         </div>
     )

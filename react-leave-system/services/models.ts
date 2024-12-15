@@ -61,18 +61,20 @@ export interface Students {
 export interface Courses {
     course_id: number,
     course_name: string,
-    description: string,
+    description?: string,
     lessons?: lesson[]
     }
 
 export interface lesson {
-    id: number,
-    course_name? : string
+    id?: number,
+    lesson_id? : number,
+    course_name? : string,
     lesson_date: string,
     start_time: string,
     end_time: string,
-    venue: string,
-    canceled_reason?: string
+    venue?: string,
+    canceled_reason?: string,
+    attendance?: Attendance[]
 }
 
 export interface Reschedule {
@@ -83,3 +85,14 @@ export interface Reschedule {
     status : string
 }
 
+export interface Attendance {
+    attendance_id : number,
+    attended : boolean,
+    rescheduled : boolean,
+    attended_lesson_id:number,
+    student_id : number,
+    english_name : string,
+    nick_name : string,
+    chinese_name : string,
+    gender : string
+}
