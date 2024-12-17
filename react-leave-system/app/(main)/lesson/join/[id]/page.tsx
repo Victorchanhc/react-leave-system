@@ -7,9 +7,6 @@ import { IconArrowLeft } from "@tabler/icons-react"
 interface JoinLessonProps {
     params: {
         id: string
-    },
-    searchParams: {
-        q: string
     }
 }
 
