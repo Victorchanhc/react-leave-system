@@ -1,6 +1,6 @@
-BACKEND_API = http://localhost:8080
-POSTGRES_DB = southteenfc_react
+BACKEND_API = 
+POSTGRES_DB = 
 POSTGRES_USER = aeroplanec
 POSTGRES_PASSWORD = aeroplanec
-POSTGRES_HOST = localhost
+POSTGRES_HOST = postgres
 COOKIE_SECRET = DeubPNpFJWqcb07TqMCmFg5f9wcTN/QM5hTIju4lFsid7vYB9yDml/m2q6YeFGkYBBFLQOWiO5VrS2vfpN8zuw==
