@@ -12,9 +12,8 @@ exports.seed = async function (knex) {
     await knex('students').del()
     await knex('users').del()
 
-    await knex('users').insert([
+    const [{id: userId1}, {id: userId2}, {id: userId3}] = await knex('users').insert([
         {
-            id:1,
             username: 'superAdmin',
             phone: '64099717',
             email: 'admin@southteenfc.com',
@@ -22,20 +21,21 @@ exports.seed = async function (knex) {
             role: 'ADMIN'
         },
         {
-            id:2,
             username: 'test1',
             phone: '64800144',
             email: 'test1@gmail.com',
             password: '$2a$10$jzh7E/mJVjCihlorWPEJPuXEvTL9xh7RtOdoa03yUHsqPdAIBBFSy'
         },
         {
-            id:3,
             username: 'test2',
             phone: '55964745',
             email: 'test2@gmail.com',
             password: '$2a$10$yjcXXSHDvrJ45joVGk1EVOZFGJsv/ZKjr15.7YPv6E4AKSobrmuyq'
         }
-    ]);
+    ]).returning('id');
+
+
+    // TODO, return ID from seed file to input your data
 
     await knex('students').insert([
         {
@@ -45,7 +45,7 @@ exports.seed = async function (knex) {
             chinese_name:'陳奕迅',
             date_of_birth:'2018-08-18',
             gender:'Male',
-            user_id:2
+            user_id:userId2
         },
         {
             id:2,
@@ -54,7 +54,7 @@ exports.seed = async function (knex) {
             chinese_name:'陳大文',
             date_of_birth:'2017-06-16',
             gender:'Male',
-            user_id:3
+            user_id:userId3
         },
         {
             id:3,
@@ -63,7 +63,7 @@ exports.seed = async function (knex) {
             chinese_name:'陳小小',
             date_of_birth:'2017-06-16',
             gender:'Female',
-            user_id:3
+            user_id:userId3
         }
     ])
 

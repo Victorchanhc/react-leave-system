@@ -2,14 +2,14 @@
 
 import { useState } from "react"
 import { Button, Col, Form, FormGroup, Row } from "react-bootstrap"
-import { lesson } from "../services/models"
+import { LessonInfo } from "../services/models"
 import { deleteLesson, updateLesson } from "../components/fetch/lesson"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { DeleteConfirmationModel } from "../components/DeleteConfirmationModel"
 
 interface AdminLessonProps {
-    lesson: lesson
+    lesson: LessonInfo
 }
 
 interface FormState {

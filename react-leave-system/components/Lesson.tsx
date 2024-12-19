@@ -1,10 +1,10 @@
 "use client"
 
 import { Card } from "react-bootstrap"
-import { lesson } from "../services/models"
+import { LessonInfo } from "../services/models"
 
 interface lessonProps {
-    lessons: lesson
+    lessons: LessonInfo
 }
 
 export function Lesson(props: lessonProps) {

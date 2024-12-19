@@ -8,57 +8,53 @@ export class RescheduleService {
     constructor(private knex: Knex) { }
 
     async getReschedule() {
-        try {
-            const result = knex('reschedule_assignments')
-                .select('reschedule_assignments.id AS reschedule_id', 'students.english_name', 'students.nick_name', 'reason', 'status')
-                .select(
-                    knex.raw(
-                        `COALESCE(
-                        (SELECT
-                            json_agg(
-                                json_build_object(
-                                'ori_lesson_id', course_lessons.id,
-                                'course_name', courses.name,
-                                'lesson_date', course_lessons.lesson_date,
-                                'start_time', course_lessons.start_time,
-                                'end_time', course_lessons.end_time,
-                                'venue', course_lessons.venue,
-                                'canceled_reason', course_lessons.canceled_reason
-                                )
+        // TODO: Should only get pending reschedules. Getting extra data poses performance and security issues
+        const result = knex('reschedule_assignments')
+            .select('reschedule_assignments.id AS reschedule_id', 'students.english_name', 'students.nick_name', 'reason', 'status')
+            .select(
+                knex.raw(
+                    `COALESCE(
+                    (SELECT
+                        json_agg(
+                            json_build_object(
+                            'ori_lesson_id', course_lessons.id,
+                            'course_name', courses.name,
+                            'lesson_date', course_lessons.lesson_date,
+                            'start_time', course_lessons.start_time,
+                            'end_time', course_lessons.end_time,
+                            'venue', course_lessons.venue,
+                            'canceled_reason', course_lessons.canceled_reason
                             )
-                            FROM course_lessons
-                            JOIN courses ON courses.id = course_lessons.course_id
-                            WHERE course_lessons.id = reschedule_assignments.original_lesson_id
-                        ),'[]'
-                    )AS original_lesson,
-                    COALESCE(
-                        (SELECT
-                            json_agg(
-                                json_build_object(
-                                'new_lesson_id', course_lessons.id,
-                                'course_name', courses.name,
-                                'lesson_date', course_lessons.lesson_date,
-                                'start_time', course_lessons.start_time,
-                                'end_time', course_lessons.end_time,
-                                'venue', course_lessons.venue,
-                                'canceled_reason', course_lessons.canceled_reason
-                                )
+                        )
+                        FROM course_lessons
+                        JOIN courses ON courses.id = course_lessons.course_id
+                        WHERE course_lessons.id = reschedule_assignments.original_lesson_id
+                    ),'[]'
+                )AS original_lesson,
+                COALESCE(
+                    (SELECT
+                        json_agg(
+                            json_build_object(
+                            'new_lesson_id', course_lessons.id,
+                            'course_name', courses.name,
+                            'lesson_date', course_lessons.lesson_date,
+                            'start_time', course_lessons.start_time,
+                            'end_time', course_lessons.end_time,
+                            'venue', course_lessons.venue,
+                            'canceled_reason', course_lessons.canceled_reason
                             )
-                            FROM course_lessons
-                            JOIN courses ON courses.id = course_lessons.course_id
-                            WHERE course_lessons.id = reschedule_assignments.new_lesson_id
-                        ),'[]'
-                    )AS new_lesson
-                 
-                `)
-                )
-                .leftJoin('students', 'students.id', 'reschedule_assignments.student_id')
+                        )
+                        FROM course_lessons
+                        JOIN courses ON courses.id = course_lessons.course_id
+                        WHERE course_lessons.id = reschedule_assignments.new_lesson_id
+                    ),'[]'
+                )AS new_lesson
+                
+            `)
+            )
+            .leftJoin('students', 'students.id', 'reschedule_assignments.student_id')
 
-            return result
-        } catch (error) {
-            console.log(error)
-            return ([])
-        }
+        return result
     }
 
     async createReschedule(data) {

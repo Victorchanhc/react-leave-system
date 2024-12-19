@@ -2,14 +2,14 @@
 
 import { FloatingLabel, Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import { courseDetail, Courses, Students } from "../services/models";
+import { courseDetail, Course, Students } from "../services/models";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { createReschedule } from "./fetch/reschedule";
 
 interface ApplyLeaveProps{
     student: Students,
-    course : Courses,
+    course : Course,
     courseDetails : courseDetail[]
     onComplete : ()=>void
 }

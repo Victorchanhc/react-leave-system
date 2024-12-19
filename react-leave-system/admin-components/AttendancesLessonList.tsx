@@ -2,11 +2,11 @@
 
 import { Accordion } from "react-bootstrap"
 import { AttendantLessonAccordion} from "./AttendancesLessonAccordion"
-import { Courses } from "../services/models"
+import { Course } from "../services/models"
 
 
 interface AttendantLessonProps {
-    attendances: Courses[]
+    attendances: Course[]
 }
 
 export function AttendantLessonList(props :AttendantLessonProps){

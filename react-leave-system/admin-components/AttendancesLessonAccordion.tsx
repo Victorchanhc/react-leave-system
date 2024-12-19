@@ -2,17 +2,15 @@
 
 import { Accordion, Col, Row } from "react-bootstrap"
 import { IconCalendarEvent, IconClockHour3, IconUserFilled } from "@tabler/icons-react"
-import { Courses } from "../services/models"
-import { useRouter } from "next/navigation"
+import { Course } from "../services/models"
 import { AttendanceForm } from "./AttendanceForm"
 
 interface AttendantLessonProps {
-    courseList: Courses
+    courseList: Course
 }
 
 export function AttendantLessonAccordion(props: AttendantLessonProps) {
 
-    const router = useRouter()
 
     return (
         <>

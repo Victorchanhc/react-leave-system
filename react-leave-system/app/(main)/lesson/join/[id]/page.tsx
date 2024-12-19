@@ -22,6 +22,12 @@ export default async function JoinLessonIDPage(props: JoinLessonProps) {
 
     const course = courseDetails.find(course => course.course_id === parseInt(id))
 
+    // if(course){
+    //
+    // }else{
+    //
+    // }
+
     return (
         <div className="container-fluid">
             <div className="d-flex m-3">

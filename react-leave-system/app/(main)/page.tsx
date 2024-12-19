@@ -9,7 +9,7 @@ export default async function Home() {
 
   const allDetails = await userService.parentGetLessons(user.id)
 
-  const courseDetails = await userService.getSelectCourses()
+  const courseDetails = await userService.getSelectedCourses()
 
   return (
     <div>

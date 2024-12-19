@@ -7,13 +7,8 @@ import { headers } from "next/headers";
 
 export default async function lessonList(){
     
-    let courses = [];
-
-    try {
-        courses = await adminCourseService.adminGetCourses()
-    } catch (error) {
-        console.error("Error fetching reschedule data:", error);
-    }
+    let courses = await adminCourseService.adminGetCourses()
+    
     
     headers()
     return(

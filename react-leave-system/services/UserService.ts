@@ -18,7 +18,7 @@ export class UserService {
         )[0]
     }
 
-    async getSelectCourses() {
+    async getSelectedCourses() {
         try {
             return this.knex('courses').select('*')
                 .leftJoin('course_lessons', 'course_lessons.course_id', 'courses.id')
@@ -61,6 +61,22 @@ export class UserService {
 
     async parentGetLessons(id: number) {
 
+
+        /**
+         * 
+         * Can use the following SQL to load the closet future lesson date from today
+         * 
+         * SELECT courses.name, courses.id, min(lesson_date) FROM users 
+        inner join students on users.id = students.user_id 
+        inner join enrollments on enrollments.student_id = students.id
+        inner join courses on courses.id = enrollments.course_id
+        inner join course_lessons on course_lessons.course_id = courses.id
+        where lesson_date > now()
+        group by courses.name, courses.id;
+        
+         */
+
+        // Following SQL Too complex 
         try {
 
             const result = await knex('users')

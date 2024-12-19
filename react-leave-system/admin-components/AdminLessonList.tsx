@@ -2,10 +2,10 @@
 
 import { Card } from "react-bootstrap";
 import { EditLessonCollapse } from "./EditLessonCollapse";
-import { Courses } from "../services/models";
+import { Course } from "../services/models";
 
 interface coursesListProps {
-    courses : Courses[]
+    courses : Course[]
 }
 
 export function AdminLessonList(props: coursesListProps) {

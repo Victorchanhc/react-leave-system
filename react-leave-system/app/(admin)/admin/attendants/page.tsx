@@ -7,6 +7,8 @@ export default async function attendants(){
 
     let attendances = [];
 
+
+    // Handle error properly
     try {
         attendances = await adminCourseService.adminGetAttendants()
     } catch (error) {

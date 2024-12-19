@@ -1,10 +1,10 @@
 
 import { Modal, Button } from 'react-bootstrap'
-import { lesson } from '../services/models'
+import { LessonInfo } from '../services/models'
 
 type DeleteConfirmationModelProps = {
     isShow:boolean,
-    lesson:lesson,
+    lesson:LessonInfo,
     onDelete:()=>void,
     onHide:()=>void
 }

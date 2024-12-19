@@ -11,7 +11,7 @@ export async function login(email: string, password:string){
             password
         })
     })
-    return res.json()
+    return res
 }
 
 

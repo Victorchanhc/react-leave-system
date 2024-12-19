@@ -13,24 +13,29 @@ export function LoginPageInfo() {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [show, setShow] = useState(false);
+    const [showError, setShowError] = useState(false);
     const router = useRouter()
 
     const onSubmit = async (e: FormEvent) => {
         e.preventDefault()
         const res = await login(email, password)
 
-        if (res === "PARENT") {
+        if(res.status !== 200){ // error case
+            setShowError(true)
+            router.refresh()
+            return 
+        }
+        // success cases
+        const data = await res.json()
+        if (data.role === "PARENT") { 
             router.push('/')
-        }else if (res === "ADMIN"){
+        }else if (data.role === "ADMIN"){
             router.push('/admin')
         }
-        setShow(true)
-        router.refresh()
     }
     return (
         <>
-            {show && <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+            {showError && <Alert variant="danger" onClose={() => setShowError(false)} dismissible>
                 <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
                 <p>
                     Please put in correct Email and Password !

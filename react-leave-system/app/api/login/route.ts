@@ -8,15 +8,19 @@ export async function POST(request: NextRequest){
     const { email, password } = await request.json()
 
     const user = await userService.getUser(email)
+
+    if(!user){ // Need to check if user exists
+        return NextResponse.json({ message: "Login Failed!"} , { status: 400})
+    }
     
     if(await checkPassword(password,user.password)){
         await sessionStore.save({
             id: user.id,
             role: user.role
         })
-        return NextResponse.json(user.role)
+        return NextResponse.json({ role: user.role })
     }
 
-    return NextResponse.json({success:false})
+    return NextResponse.json({ message: "Login Failed!"} , { status: 400})
     
 }

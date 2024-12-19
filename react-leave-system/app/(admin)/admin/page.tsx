@@ -5,13 +5,8 @@ import { rescheduleService } from "../../../services/RescheduleService";
 
 export default async function AdminPage() {
 
-    let requests = [];
-
-    try {
-        requests = await rescheduleService.getReschedule()
-    } catch (error) {
-        console.error("Error fetching reschedule data:", error);
-    }
+    // Very good usage of SQL aggregation function
+    let requests = await rescheduleService.getReschedule()
 
     headers()
     return (

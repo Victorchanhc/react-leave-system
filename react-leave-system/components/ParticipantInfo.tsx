@@ -57,7 +57,7 @@ export function ParticipantInfo(props: studentProps) {
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Date of birth</Form.Label>
-                        <Form.Control type="text" {...register("date_of_birth")} defaultValue={student.date_of_birth} disabled={edit} required />
+                        <Form.Control type="date" {...register("date_of_birth")} defaultValue={student.date_of_birth} disabled={edit} required />
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Gender</Form.Label>

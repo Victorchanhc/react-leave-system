@@ -8,7 +8,12 @@ import { ConfirmLogoutModel } from "./ConfirmLogoutModel";
 
 export default function SideBar() {
 
+    // Use meaningful variable names
     const [show, setShow] = useState(false)
+
+
+
+    // Important ! Use next/link to get the benefit of client side rendering
 
     return (
         <>
@@ -25,7 +30,7 @@ export default function SideBar() {
             {
                 show && 
                 <ConfirmLogoutModel
-                isShow={show}
+                isShown={show}
                 onHide={()=>{setShow(false)}}
                 />
             }

@@ -5,7 +5,7 @@ import { logout } from "./fetch/auth";
 import { useRouter } from "next/navigation";
 
 type ConfirmLogoutModelProps = {
-    isShow:boolean,
+    isShown:boolean,
     onHide:()=>void
 }
 
@@ -25,7 +25,7 @@ export function ConfirmLogoutModel(props:ConfirmLogoutModelProps) {
 
     return (
 
-        <Modal show={props.isShow} onHide={props.onHide}>
+        <Modal show={props.isShown} onHide={props.onHide}>
             <Modal.Header closeButton>
                 <Modal.Title>Logout System</Modal.Title>
             </Modal.Header>

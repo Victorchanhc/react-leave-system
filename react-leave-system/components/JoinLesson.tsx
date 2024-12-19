@@ -2,12 +2,12 @@
 
 import { useRouter } from "next/navigation"
 import { Alert, Button, Card, Form } from "react-bootstrap"
-import { AllDetails, Courses } from "../services/models"
+import { AllDetails, Course } from "../services/models"
 import { useForm } from "react-hook-form"
 import { createEnrollment } from "./fetch/enrollment"
 
 interface DetailsProps {
-    course: Courses,
+    course: Course,
     allDetails?: AllDetails[]
 }
 
@@ -26,7 +26,7 @@ export function JoinLesson(props: DetailsProps) {
 
     async function submit(data: FormState) {
         await createEnrollment(data)
-        reset
+        reset()
         router.push("/")
 
     }

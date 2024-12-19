@@ -60,36 +60,30 @@ export class AdminCourseService {
     }
 
     async adminGetCourses() {
-        try {
-
-            return this.knex('courses').select('id AS course_id', 'name AS course_name', 'description')
-                .select(
-                    knex.raw(
-                        `
-                        COALESCE(
-                            (SELECT
-                                json_agg(
-                                    json_build_object(
-                                    'lesson_id', course_lessons.id,
-                                    'course_name', courses.name,
-                                    'lesson_date', course_lessons.lesson_date,
-                                    'start_time', course_lessons.start_time,
-                                    'end_time', course_lessons.end_time,
-                                    'venue', course_lessons.venue,
-                                    'canceled_reason', course_lessons.canceled_reason
-                                    )
+        return this.knex('courses').select('id AS course_id', 'name AS course_name', 'description')
+            .select(
+                knex.raw(
+                    `
+                    COALESCE(
+                        (SELECT
+                            json_agg(
+                                json_build_object(
+                                'lesson_id', course_lessons.id,
+                                'course_name', courses.name,
+                                'lesson_date', course_lessons.lesson_date,
+                                'start_time', course_lessons.start_time,
+                                'end_time', course_lessons.end_time,
+                                'venue', course_lessons.venue,
+                                'canceled_reason', course_lessons.canceled_reason
                                 )
-                                FROM course_lessons
-                                WHERE course_lessons.course_id = courses.id
-                            ),'[]'
-                        )AS lessons`
-                    )
+                            )
+                            FROM course_lessons
+                            WHERE course_lessons.course_id = courses.id
+                        ),'[]'
+                    )AS lessons`
                 )
-                .orderBy("courses.id")
-        }catch (error){
-            console.log(error)
-            return([])
-        }
+            )
+            .orderBy("courses.id")
     }
 
     async createCourse(data) {
@@ -157,6 +151,8 @@ export class AdminCourseService {
                 .where('attendance_records.id','=', record.attendance_id)
                 .update({ attended: record.attended });
         }
+
+        // Only useful in debug, should be removed after development
         console.log("Attendance records updated successfully.");
     }
 }

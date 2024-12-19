@@ -2,7 +2,7 @@
 
 import { IconArrowBadgeRightFilled } from "@tabler/icons-react";
 import { Button, Card, Col, Row } from "react-bootstrap";
-import { lesson } from "../services/models";
+import { LessonInfo } from "../services/models";
 import { Lesson } from "./Lesson";
 import { updateReschedule } from "./fetch/reschedule";
 import { useRouter } from "next/navigation";
@@ -14,8 +14,8 @@ interface RequestLeaveProps {
         nick_name: string,
         status: string,
         reason: string,
-        original_lesson: lesson[],
-        new_lesson:lesson[]
+        original_lesson: LessonInfo[],
+        new_lesson:LessonInfo[]
 
     }[]
 

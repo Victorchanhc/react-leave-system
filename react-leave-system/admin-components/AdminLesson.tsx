@@ -1,13 +1,13 @@
 "use client"
 
 import { Card } from "react-bootstrap"
-import { lesson } from "../services/models"
+import { LessonInfo } from "../services/models"
 import  styles  from "../app/(main)/leave.module.scss"
 
 
 interface AdminLessonProps {
     course_name : string
-    lesson: lesson
+    lesson: LessonInfo
 }
 
 export function AdminLesson(props:AdminLessonProps) {

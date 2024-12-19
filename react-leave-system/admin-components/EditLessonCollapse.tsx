@@ -3,14 +3,14 @@
 import { useState } from "react"
 import { Button, Col, Collapse, Form, FormGroup, Row } from "react-bootstrap"
 import { AdminLesson } from "./AdminLesson"
-import { Courses } from "../services/models"
+import { Course } from "../services/models"
 import { EditLesson } from "./EditLesson"
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"
 import { createLesson } from "../components/fetch/lesson"
 
 interface AdminLessonProps {
-    course: Courses
+    course: Course
 }
 
 interface FormState {
@@ -24,7 +24,6 @@ interface FormState {
 export function EditLessonCollapse(props: AdminLessonProps) {
 
     const [open, setOpen] = useState(false)
-    const [edit, setEdit] = useState(true)
 
     const router = useRouter()
 
@@ -42,7 +41,6 @@ export function EditLessonCollapse(props: AdminLessonProps) {
         await createLesson(data)
         router.refresh()
         reset()
-        setEdit(!edit)
 
     }
 
@@ -81,24 +79,19 @@ export function EditLessonCollapse(props: AdminLessonProps) {
                             <Form.Control type="text" {...register("course_id")} defaultValue={props.course.course_id} hidden />
                             <Row className="ps-1">
                                 <Col md="auto" className="my-1">
-                                    <Form.Control type="date" {...register("lesson_date")}  disabled={edit} required />
+                                    <Form.Control type="date" {...register("lesson_date")}  required />
                                 </Col>
                                 <Col md="auto" className="my-1">
-                                    <Form.Control type="time" {...register("start_time")} defaultValue={props.course.lessons[0]?.start_time} disabled={edit} required />
+                                    <Form.Control type="time" {...register("start_time")} defaultValue={props.course.lessons[0]?.start_time}  required />
                                 </Col>
                                 <Col md="auto" className="my-1">
-                                    <Form.Control type="time" {...register("end_time")} defaultValue={props.course.lessons[0]?.end_time} disabled={edit} required />
+                                    <Form.Control type="time" {...register("end_time")} defaultValue={props.course.lessons[0]?.end_time} required />
                                 </Col>
                                 <Col md="auto" className="my-1">
-                                    <Form.Control type="text" {...register("venue")} defaultValue={props.course.lessons[0]?.venue} disabled={edit} required />
+                                    <Form.Control type="text" {...register("venue")} defaultValue={props.course.lessons[0]?.venue} required />
                                 </Col>
                                 <Col md="auto" className="my-1 d-flex justify-content-between">
-                                    {
-                                        edit && <Button variant="dark" style={{ minWidth: 70 }} onClick={() => setEdit(!edit)}>Add New</Button>
-                                    }
-                                    {
-                                        !edit && <Button type="submit" className="align-self-center">Save</Button>
-                                    }
+                                    <Button type="submit" className="align-self-center">Save</Button>
                                 </Col>
 
                             </Row>

@@ -1,14 +1,21 @@
 'use client'
 import { Card, Col, Row } from "react-bootstrap";
 import Link from "next/link";
-import { Courses } from "../services/models";
+import { Course } from "../services/models";
 
 interface LessonListProps {
-    courses : Courses[]
+    courses : Course[]
 }
 
 
 export function LessonList(props: LessonListProps) {
+
+    // What is there is 0 lesson for this course
+
+    // There must be a checking for length > 0
+    // if(course.lessons.length > 0){
+    //     course.lessons[0]
+    // }
 
     return (
         <div>
