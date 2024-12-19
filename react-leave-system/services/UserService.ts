@@ -19,33 +19,44 @@ export class UserService {
     }
 
     async getSelectCourses() {
-        return this.knex('courses').select('*')
-            .leftJoin('course_lessons', 'course_lessons.course_id', 'courses.id')
-            .groupBy('courses.id', 'course_lessons.id')
-            .orderBy('courses.id', 'course_lessons.id')
+        try {
+            return this.knex('courses').select('*')
+                .leftJoin('course_lessons', 'course_lessons.course_id', 'courses.id')
+                .groupBy('courses.id', 'course_lessons.id')
+                .orderBy('courses.id', 'course_lessons.id')
+        } catch(error){
+            console.log(error)
+            return([])
+        }
     }
 
     async getCourses() {
-        const result = await knex('courses')
-            .select('courses.id AS course_id', 'name AS course_name', 'description')
-            .select(
-                knex.raw(
-                    `COALESCE(
-                        json_agg(
-                            json_build_object(
-                                'id',course_lessons.id,
-                                'lesson_date',course_lessons.lesson_date,
-                                'start_time',course_lessons.start_time,
-                                'end_time',course_lessons.end_time,
-                                'venue',course_lessons.venue
-                            )
-                        ),'[]'
-                    )AS lessons`
-                )
-            ).leftJoin('course_lessons', 'course_lessons.course_id', 'courses.id')
-            .groupBy('courses.id')
 
-        return result
+        try{
+            const result = await knex('courses')
+                .select('courses.id AS course_id', 'name AS course_name', 'description')
+                .select(
+                    knex.raw(
+                        `COALESCE(
+                            json_agg(
+                                json_build_object(
+                                    'id',course_lessons.id,
+                                    'lesson_date',course_lessons.lesson_date,
+                                    'start_time',course_lessons.start_time,
+                                    'end_time',course_lessons.end_time,
+                                    'venue',course_lessons.venue
+                                )
+                            ),'[]'
+                        )AS lessons`
+                    )
+                ).leftJoin('course_lessons', 'course_lessons.course_id', 'courses.id')
+                .groupBy('courses.id')
+    
+            return result
+        } catch (error){
+            console.log(error)
+            return([])
+        }
     }
 
     async parentGetLessons(id: number) {

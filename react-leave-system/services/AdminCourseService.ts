@@ -7,68 +7,44 @@ export class AdminCourseService {
     constructor(private knex: Knex) { }
 
     async adminGetAttendants(){
-        return knex('courses').select('id AS course_id', 'name AS course_name')
-        .select(
-            knex.raw(
-                `
-                    COALESCE(
-                        (SELECT
-                            json_agg(
-                                json_build_object(
-                                'lesson_id', course_lessons.id,
-                                'course_name', courses.name,
-                                'lesson_date', course_lessons.lesson_date,
-                                'start_time', course_lessons.start_time,
-                                'end_time', course_lessons.end_time,
-                                'venue', course_lessons.venue,
-                                'canceled_reason', course_lessons.canceled_reason,
-                                'attendance',COALESCE(
-                                    (SELECT
-                                        json_agg(
-                                            json_build_object(
-                                                'attendance_id', attendance_records.id,
-                                                'attended', attendance_records.attended,
-                                                'rescheduled', attendance_records.rescheduled,
-                                                'attended_lesson_id', attendance_records.lesson_id,
-                                                'student_id', students.id,
-                                                'english_name', students.english_name,
-                                                'nick_name', students.nick_name,
-                                                'chinese_name', students.chinese_name,
-                                                'gender', students.gender
-                                                
-                                            )
-                                        )
-                                        FROM attendance_records
-                                        JOIN students ON students.id = attendance_records.student_id
-                                        WHERE attendance_records.lesson_id = course_lessons.id
-                                    ),'[]'
-                                )
-                            )
-                        )
-                        FROM course_lessons
-                        WHERE course_lessons.course_id = courses.id
-                    ),'[]'
-                )AS lessons`
-            )
-        )
-    }
+        try{
 
-    async adminGetCourses() {
-        return this.knex('courses').select('id AS course_id', 'name AS course_name', 'description')
+            return knex('courses').select('id AS course_id', 'name AS course_name')
             .select(
                 knex.raw(
                     `
-                    COALESCE(
-                        (SELECT
-                            json_agg(
-                                json_build_object(
-                                'lesson_id', course_lessons.id,
-                                'course_name', courses.name,
-                                'lesson_date', course_lessons.lesson_date,
-                                'start_time', course_lessons.start_time,
-                                'end_time', course_lessons.end_time,
-                                'venue', course_lessons.venue,
-                                'canceled_reason', course_lessons.canceled_reason
+                        COALESCE(
+                            (SELECT
+                                json_agg(
+                                    json_build_object(
+                                    'lesson_id', course_lessons.id,
+                                    'course_name', courses.name,
+                                    'lesson_date', course_lessons.lesson_date,
+                                    'start_time', course_lessons.start_time,
+                                    'end_time', course_lessons.end_time,
+                                    'venue', course_lessons.venue,
+                                    'canceled_reason', course_lessons.canceled_reason,
+                                    'attendance',COALESCE(
+                                        (SELECT
+                                            json_agg(
+                                                json_build_object(
+                                                    'attendance_id', attendance_records.id,
+                                                    'attended', attendance_records.attended,
+                                                    'rescheduled', attendance_records.rescheduled,
+                                                    'attended_lesson_id', attendance_records.lesson_id,
+                                                    'student_id', students.id,
+                                                    'english_name', students.english_name,
+                                                    'nick_name', students.nick_name,
+                                                    'chinese_name', students.chinese_name,
+                                                    'gender', students.gender
+                                                    
+                                                )
+                                            )
+                                            FROM attendance_records
+                                            JOIN students ON students.id = attendance_records.student_id
+                                            WHERE attendance_records.lesson_id = course_lessons.id
+                                        ),'[]'
+                                    )
                                 )
                             )
                             FROM course_lessons
@@ -77,7 +53,43 @@ export class AdminCourseService {
                     )AS lessons`
                 )
             )
-            .orderBy("courses.id")
+        }catch(error){
+            console.log(error)
+            return([])
+        }
+    }
+
+    async adminGetCourses() {
+        try {
+
+            return this.knex('courses').select('id AS course_id', 'name AS course_name', 'description')
+                .select(
+                    knex.raw(
+                        `
+                        COALESCE(
+                            (SELECT
+                                json_agg(
+                                    json_build_object(
+                                    'lesson_id', course_lessons.id,
+                                    'course_name', courses.name,
+                                    'lesson_date', course_lessons.lesson_date,
+                                    'start_time', course_lessons.start_time,
+                                    'end_time', course_lessons.end_time,
+                                    'venue', course_lessons.venue,
+                                    'canceled_reason', course_lessons.canceled_reason
+                                    )
+                                )
+                                FROM course_lessons
+                                WHERE course_lessons.course_id = courses.id
+                            ),'[]'
+                        )AS lessons`
+                    )
+                )
+                .orderBy("courses.id")
+        }catch (error){
+            console.log(error)
+            return([])
+        }
     }
 
     async createCourse(data) {

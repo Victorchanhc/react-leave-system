@@ -1,5 +1,5 @@
-BACKEND_API = 
-POSTGRES_DB = 
+BACKEND_API = http://localhost:8080
+POSTGRES_DB = southteenfc_react
 POSTGRES_USER = aeroplanec
 POSTGRES_PASSWORD = aeroplanec
 POSTGRES_HOST = postgres
