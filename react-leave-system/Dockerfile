@@ -4,6 +4,4 @@ COPY . .
 EXPOSE 3000
 RUN yarn install 
 RUN yarn build
-CMD yarn knex migrate:latest &&\
-    yarn knex seed:run &&\
-    yarn start
+CMD ["sh", "-c", "yarn knex migrate:latest && yarn knex seed:run && yarn start"]
