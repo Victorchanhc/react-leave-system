@@ -1,3 +1,5 @@
+"use client"
+
 import { Accordion } from "react-bootstrap"
 import { AttendantLessonAccordion} from "./AttendancesLessonAccordion"
 import { Courses } from "../services/models"

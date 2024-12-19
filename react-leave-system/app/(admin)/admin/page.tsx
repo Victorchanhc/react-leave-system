@@ -4,7 +4,13 @@ import { rescheduleService } from "../../../services/RescheduleService";
 
 export default async function AdminPage() {
 
-    const requests = await rescheduleService.getReschedule()
+    let requests = [];
+
+    try {
+        requests = await rescheduleService.getReschedule()
+    } catch (error) {
+        console.error("Error fetching reschedule data:", error);
+    }
 
     return (
         <div>

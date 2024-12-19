@@ -6,7 +6,14 @@ import { adminCourseService } from "../../../../services/AdminCourseService";
 
 export default async function lessonList(){
     
-    const courses = await adminCourseService.adminGetCourses()
+    let courses = [];
+
+    try {
+        courses = await adminCourseService.adminGetCourses()
+    } catch (error) {
+        console.error("Error fetching reschedule data:", error);
+    }
+    
 
     return(
         <div>
