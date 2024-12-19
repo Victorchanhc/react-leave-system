@@ -1,5 +1,5 @@
 import { headers } from "next/headers";
-import { AttendantLessonList } from "../../../../AdminComponents/AttendancesLessonList";
+import { AttendantLessonList } from "../../../../admin-components/AttendancesLessonList";
 import { adminCourseService } from "../../../../services/AdminCourseService";
 
 

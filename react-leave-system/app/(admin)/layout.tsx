@@ -3,8 +3,8 @@ import "./admin.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import { AdminSideNavbar } from "../../AdminComponents/AdminSideNavbar";
-import AdminSideBar from "../../AdminComponents/AdminSideBar";
+import { AdminSideNavbar } from "../../admin-components/AdminSideNavbar";
+import AdminSideBar from "../../admin-components/AdminSideBar";
 
 export const metadata: Metadata = {
   title: "React-leave-system",

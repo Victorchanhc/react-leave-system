@@ -1,6 +1,6 @@
 
-import { AdminLessonList } from "../../../../AdminComponents/AdminLessonList";
-import { AddNewLessonCollapse } from "../../../../AdminComponents/AddNewCourseCollapse";
+import { AdminLessonList } from "../../../../admin-components/AdminLessonList";
+import { AddNewLessonCollapse } from "../../../../admin-components/AddNewCourseCollapse";
 import { adminCourseService } from "../../../../services/AdminCourseService";
 import { headers } from "next/headers";
 
