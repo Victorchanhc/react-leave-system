@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import { AdminHomeInfo } from "../../../components/AdminHomeInfo";
 import { rescheduleService } from "../../../services/RescheduleService";
 
@@ -12,6 +13,7 @@ export default async function AdminPage() {
         console.error("Error fetching reschedule data:", error);
     }
 
+    headers()
     return (
         <div>
             <div className="text-center mt-3">

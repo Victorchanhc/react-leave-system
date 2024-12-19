@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import { AttendantLessonList } from "../../../../AdminComponents/AttendancesLessonList";
 import { adminCourseService } from "../../../../services/AdminCourseService";
 
@@ -12,7 +13,7 @@ export default async function attendants(){
         console.error("Error fetching attendances data:", error);
     }
 
-
+    headers()
     return(
         <div>
             <div className="ms-3 mt-3">
