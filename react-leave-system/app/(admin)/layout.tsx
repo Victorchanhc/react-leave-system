@@ -6,6 +6,9 @@ import { Col, Row } from "react-bootstrap";
 import { AdminSideNavbar } from "../../admin-components/AdminSideNavbar";
 import AdminSideBar from "../../admin-components/AdminSideBar";
 
+// Avoid pre-rendering Server side rendering page
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: "React-leave-system",
   description: "React-leave-system",
