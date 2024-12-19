@@ -2,6 +2,7 @@
 import { AdminLessonList } from "../../../../AdminComponents/AdminLessonList";
 import { AddNewLessonCollapse } from "../../../../AdminComponents/AddNewCourseCollapse";
 import { adminCourseService } from "../../../../services/AdminCourseService";
+import { headers } from "next/headers";
 
 
 export default async function lessonList(){
@@ -14,7 +15,7 @@ export default async function lessonList(){
         console.error("Error fetching reschedule data:", error);
     }
     
-
+    headers()
     return(
         <div>
             <div className="ms-3 mt-3">
