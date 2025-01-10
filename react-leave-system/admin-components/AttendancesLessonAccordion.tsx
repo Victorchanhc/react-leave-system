@@ -11,7 +11,6 @@ interface AttendantLessonProps {
 
 export function AttendantLessonAccordion(props: AttendantLessonProps) {
 
-
     return (
         <>
             <Accordion.Item eventKey={`${props.courseList.course_id}`}>

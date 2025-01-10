@@ -1,14 +1,11 @@
 import { Knex } from "knex";
 import { knex } from "./knex";
 
-
-
 export class RescheduleService {
 
     constructor(private knex: Knex) { }
 
     async getReschedule() {
-        // TODO: Should only get pending reschedules. Getting extra data poses performance and security issues
         const result = knex('reschedule_assignments')
             .select('reschedule_assignments.id AS reschedule_id', 'students.english_name', 'students.nick_name', 'reason', 'status')
             .select(
@@ -53,6 +50,7 @@ export class RescheduleService {
             `)
             )
             .leftJoin('students', 'students.id', 'reschedule_assignments.student_id')
+            .where('status', '=', 'PENDING')
 
         return result
     }
@@ -68,7 +66,6 @@ export class RescheduleService {
     }
 
     async updateReschedule(id: number) {
-        console.log("get in service PUT")
 
         return knex('reschedule_assignments').where('reschedule_assignments.id', '=', id).update(
             {

@@ -8,6 +8,8 @@ export default async function AdminPage() {
     // Very good usage of SQL aggregation function
     let requests = await rescheduleService.getReschedule()
 
+    console.log(requests)
+
     headers()
     return (
         <div>

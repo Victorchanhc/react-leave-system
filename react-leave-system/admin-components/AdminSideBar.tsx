@@ -8,6 +8,7 @@ import Link from "next/link";
 export default function AdminSideBar() {
 
     const [ showLogoutModal, setShowLogoutModal ] = useState(false)
+    
     return (
         <>
             <Navbar.Offcanvas className="col-md-2 bg-dark text-white" responsive="lg">

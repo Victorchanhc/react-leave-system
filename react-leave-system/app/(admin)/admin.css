@@ -44,6 +44,8 @@ a {
 
 .navItem {
   height: 60px;
+  color: rgb(0, 132, 255);
+  padding-left: 15px;
 }
 
 .loginContainer {

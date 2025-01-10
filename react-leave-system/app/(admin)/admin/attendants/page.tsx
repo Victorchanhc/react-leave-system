@@ -5,16 +5,8 @@ import { adminCourseService } from "../../../../services/AdminCourseService";
 
 export default async function attendants(){
 
-    let attendances = [];
-
-
-    // Handle error properly
-    try {
-        attendances = await adminCourseService.adminGetAttendants()
-    } catch (error) {
-        console.error("Error fetching attendances data:", error);
-    }
-
+    const attendances = await adminCourseService.adminGetAttendants()
+    
     headers()
     return(
         <div>
