@@ -7,6 +7,7 @@ import Image from "next/image"
 import { FormEvent, useState } from "react";
 import { login } from "./fetch/auth";
 import { useRouter } from "next/navigation";
+import { IconEye, IconEyeClosed } from "@tabler/icons-react";
 
 export function LoginPageInfo() {
 
@@ -15,6 +16,12 @@ export function LoginPageInfo() {
     const [password, setPassword] = useState("")
     const [showError, setShowError] = useState(false);
     const router = useRouter()
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePassword = () => {
+        setShowPassword((prev) => !prev);
+    };
 
     const onSubmit = async (e: FormEvent) => {
         e.preventDefault()
@@ -51,12 +58,29 @@ export function LoginPageInfo() {
                             <Form.Control type='text' placeholder='example@email.com' value={email} onChange={(e) => { setEmail(e.target.value) }} required />
                         </FloatingLabel>
                         <FloatingLabel label='Password' controlId='loginPasswordInput' className='mb-3 mx-4'>
-                            <Form.Control type='password' placeholder='password' value={password} onChange={(e) => { setPassword(e.target.value) }} required />
+                            <Form.Control type={showPassword ? 'text' : 'password'} placeholder='password' value={password} onChange={(e) => { setPassword(e.target.value) }} required />
                         </FloatingLabel>
                         <Form.Group className="px-4 mb-3">
                             <Button className="container-fluid" type="submit">Login</Button>
                         </Form.Group>
                     </Form>
+                    <button
+                        onClick={togglePassword}
+                        style={{
+                        position: 'absolute',
+                        right: '580px',
+                        top: '48%',
+                        transform: 'translateY(-50%)',
+                        background: 'transparent',
+                        border: 'none',
+                        cursor: 'pointer',
+                        fontSize: '1px',
+                        color: '#333',
+                        }}
+                        tabIndex={-1} // optional: skip tab focus on button
+                    >
+                        {showPassword ? <IconEye/> : <IconEyeClosed/> }
+                    </button>
                     <div className="px-4">
                         <a href="/connect/google" className="btn btn-secondary container-fluid mb-3">
                             <Image src={googleLogo} width={20} height={20} alt="google-logo" className="me-2" />
