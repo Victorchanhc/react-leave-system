@@ -27,16 +27,16 @@ export function LoginPageInfo() {
         e.preventDefault()
         const res = await login(email, password)
 
-        if(res.status !== 200){ // error case
+        if (res.status !== 200) { // error case
             setShowError(true)
             router.refresh()
-            return 
+            return
         }
         // success cases
         const data = await res.json()
-        if (data.role === "PARENT") { 
+        if (data.role === "PARENT") {
             router.push('/')
-        }else if (data.role === "ADMIN"){
+        } else if (data.role === "ADMIN") {
             router.push('/admin')
         }
     }
@@ -45,7 +45,7 @@ export function LoginPageInfo() {
             {showError && <Alert variant="danger" onClose={() => setShowError(false)} dismissible>
                 <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
                 <p>
-                    Please put in correct Email and Password !
+                    Please check your Email and Password !
                 </p>
             </Alert>}
             <div className="loginBGContainer d-flex justify-content-center align-items-center">
@@ -59,28 +59,28 @@ export function LoginPageInfo() {
                         </FloatingLabel>
                         <FloatingLabel label='Password' controlId='loginPasswordInput' className='mb-3 mx-4'>
                             <Form.Control type={showPassword ? 'text' : 'password'} placeholder='password' value={password} onChange={(e) => { setPassword(e.target.value) }} required />
+                            <button
+                                onClick={togglePassword}
+                                style={{
+                                    position: 'absolute',
+                                    right: '15px',
+                                    top: '50%',
+                                    transform: 'translateY(-50%)',
+                                    background: 'transparent',
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    fontSize: '1px',
+                                    color: '#333',
+                                }}
+                            >
+                                {showPassword ? <IconEye /> : <IconEyeClosed />}
+                            </button>
+
                         </FloatingLabel>
                         <Form.Group className="px-4 mb-3">
                             <Button className="container-fluid" type="submit">Login</Button>
                         </Form.Group>
                     </Form>
-                    <button
-                        onClick={togglePassword}
-                        style={{
-                        position: 'absolute',
-                        right: '580px',
-                        top: '48%',
-                        transform: 'translateY(-50%)',
-                        background: 'transparent',
-                        border: 'none',
-                        cursor: 'pointer',
-                        fontSize: '1px',
-                        color: '#333',
-                        }}
-                        tabIndex={-1} // optional: skip tab focus on button
-                    >
-                        {showPassword ? <IconEye/> : <IconEyeClosed/> }
-                    </button>
                     <div className="px-4">
                         <a href="/connect/google" className="btn btn-secondary container-fluid mb-3">
                             <Image src={googleLogo} width={20} height={20} alt="google-logo" className="me-2" />

@@ -37,9 +37,8 @@ exports.seed = async function (knex) {
 
     // TODO, return ID from seed file to input your data
 
-    await knex('students').insert([
+    const [{id: studentId1}, {id: studentId2}, {id:studentId3}] =  await knex('students').insert([
         {
-            id:1,
             english_name:'Jacko Wan',
             nick_name:'Jacko',
             chinese_name:'陳奕迅',
@@ -48,7 +47,6 @@ exports.seed = async function (knex) {
             user_id:userId2
         },
         {
-            id:2,
             english_name:'Chan Tai Man',
             nick_name:'Chan',
             chinese_name:'陳大文',
@@ -57,7 +55,6 @@ exports.seed = async function (knex) {
             user_id:userId3
         },
         {
-            id:3,
             english_name:'Chan Siu Siu',
             nick_name:'Small',
             chinese_name:'陳小小',
@@ -65,135 +62,125 @@ exports.seed = async function (knex) {
             gender:'Female',
             user_id:userId3
         }
-    ])
+    ]).returning("id");
 
-    await knex('courses').insert([
+    const [{id:coursesId1}, {id:coursesId2}, {id:coursesId3}, {id:coursesId4}] = await knex('courses').insert([
         {
-            id:1,
             name:'星期日 上午 荃灣',
             description:'This is a fun game course on sunday'
         },
         {
-            id:2,
             name:'星期六 下午 荃灣',
             description:'This is a fun game course on saturday'
         },
         {
-            id:3,
             name:'星期六 上午 葵涌',
             description:'This is a fun game course on Kwai Chung'
         },
         {
-            id:4,
             name:'星期五 晚上 葵涌',
             description:'This is a fun game course on Kwai Chung'
         }
-    ])
+    ]).returning("id");
 
-    await knex('course_lessons').insert([
+    const [{id:lessonId1}, {id:lessonId2}, {id:lessonId3}, {id:lessonId4}, {id:lessonId5}, {id:lessonId6}] = await knex('course_lessons').insert([
         {
-            id:1,
-            course_id:1,
+            course_id:coursesId1,
             lesson_date:'2024-01-01',
             start_time:'09:00:00',
             end_time:'11:00:00',
             venue:'城門谷五人場'
         },
         {
-            id:2,
-            course_id:1,
+            course_id:coursesId1,
             lesson_date:'2025-01-01',
             start_time:'09:00:00',
             end_time:'11:00:00',
             venue:'城門谷五人場'
         },
         {
-            id:3,
-            course_id:1,
+            course_id:coursesId1,
             lesson_date:'2025-01-08',
             start_time:'09:00:00',
             end_time:'11:00:00',
             venue:'城門谷五人場'
         },
         {
-            id:4,
-            course_id:2,
+            course_id:coursesId2,
             lesson_date:'2025-01-07',
             start_time:'18:00:00',
             end_time:'20:00:00',
             venue:'沙咀道遊樂場'
         },
         {
-            id:5,
-            course_id:3,
+            course_id:coursesId3,
             lesson_date:'2025-01-07',
             start_time:'09:00:00',
             end_time:'11:00:00',
             venue:'坑坪街遊樂場'
         },
         {
-            id:6,
-            course_id:4,
+            course_id:coursesId4,
             lesson_date:'2025-01-13',
             start_time:'19:00:00',
             end_time:'21:00:00',
             venue:'坑坪街遊樂場'
         },
-    ]);
+    ]).returning("id");
 
 
     await knex('enrollments').insert([
         {
-            student_id:1,
-            course_id:1
+            student_id:studentId1,
+            course_id:coursesId1
         },
         {
-            student_id:2,
-            course_id:2
+            student_id:studentId2,
+            course_id:coursesId2
         },
         {
-            student_id:3,
-            course_id:3
+            student_id:studentId3,
+            course_id:coursesId3
         }
     ])
 
     await knex('reschedule_assignments').insert([
         {
-            student_id:1,
-            original_lesson_id:3,
-            new_lesson_id:6,
+            student_id:studentId1,
+            original_lesson_id:lessonId3,
+            new_lesson_id:lessonId6,
             reason:'sick'
         }
     ])
 
     await knex('attendance_records').insert([
         {
-            student_id:1,
-            lesson_id:1,
+            student_id:studentId1,
+            lesson_id:lessonId1,
         },
         {
-            student_id:1,
-            lesson_id:2,
+            student_id:studentId1,
+            lesson_id:lessonId2,
         },
         {
-            student_id:1,
-            lesson_id:3,
+            student_id:studentId1,
+            lesson_id:lessonId3,
         },
         {
-            student_id:2,
-            lesson_id:4,
+            student_id:studentId2,
+            lesson_id:lessonId4,
         },
         {
-            student_id:3,
-            lesson_id:1,
+            student_id:studentId3,
+            lesson_id:lessonId1,
         },
         {
-            student_id:3,
-            lesson_id:2,
+            student_id:studentId3,
+            lesson_id:lessonId2,
         },
         {
-            student_id:3,
-            lesson_id:3,
+            student_id:studentId3,
+            lesson_id:lessonId3,
         },
     ])
 
