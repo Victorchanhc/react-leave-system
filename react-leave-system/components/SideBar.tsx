@@ -1,13 +1,13 @@
 "use client"
 import React, { useState } from "react";
-import { Button, Nav, Navbar, Offcanvas } from "react-bootstrap";
+import { Nav, Navbar, Offcanvas } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ConfirmLogoutModel } from "./ConfirmLogoutModel";
 import Link from "next/link";
 
 export default function SideBar() {
 
-    const [ showLogoutModal, setShowLogoutModal ] = useState(false)
+    const [showLogoutModal, setShowLogoutModal] = useState(false)
 
     return (
         <>
@@ -17,21 +17,17 @@ export default function SideBar() {
                         <Link href="/" className="navItem">Home</Link>
                         <Link href="/lesson" className="navItem">Lesson</Link>
                         <Link href="/account" className="navItem">My Account</Link>
-                        <Nav.Link onClick={()=>{setShowLogoutModal(true)}} >Logout</Nav.Link>
+                        <Nav.Link onClick={() => { setShowLogoutModal(true) }} >Logout</Nav.Link>
                     </Nav>
                 </Offcanvas.Body>
             </Navbar.Offcanvas>
             {
-                showLogoutModal && 
+                showLogoutModal &&
                 <ConfirmLogoutModel
-                isShown={showLogoutModal}
-                onHide={()=>{setShowLogoutModal(false)}}
+                    isShown={showLogoutModal}
+                    onHide={() => { setShowLogoutModal(false) }}
                 />
             }
-
         </>
-        
-
-
     )
 }

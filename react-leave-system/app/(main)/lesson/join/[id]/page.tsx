@@ -3,6 +3,7 @@ import { userService } from "../../../../../services/UserService"
 import { sessionStore } from "../../../../../services/SessionStore"
 import { JoinLesson } from "../../../../../components/JoinLesson"
 import { IconArrowLeft } from "@tabler/icons-react"
+import Link from "next/link"
 
 interface JoinLessonProps {
     params: {
@@ -31,7 +32,7 @@ export default async function JoinLessonIDPage(props: JoinLessonProps) {
     return (
         <div className="container-fluid">
             <div className="d-flex m-3">
-                <a href="/lesson" className="mx-3 align-self-center font-weight-bold"><IconArrowLeft></IconArrowLeft></a>
+                <Link href="/lesson" className="mx-3 align-self-center font-weight-bold"><IconArrowLeft></IconArrowLeft></Link>
                 
                 <h1>Join Lesson</h1>
             </div>

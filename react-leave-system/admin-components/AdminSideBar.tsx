@@ -7,8 +7,8 @@ import Link from "next/link";
 
 export default function AdminSideBar() {
 
-    const [ showLogoutModal, setShowLogoutModal ] = useState(false)
-    
+    const [showLogoutModal, setShowLogoutModal] = useState(false)
+
     return (
         <>
             <Navbar.Offcanvas className="col-md-2 bg-dark text-white" responsive="lg">
@@ -17,15 +17,15 @@ export default function AdminSideBar() {
                         <Link href="/admin" className="navItem">Dashboard</Link>
                         <Link href="/admin/lessonlist" className="navItem">Lesson List</Link>
                         <Link href="/admin/attendants" className="navItem">Attendants</Link>
-                        <Nav.Link onClick={()=>{setShowLogoutModal(true)}} >Logout</Nav.Link>
+                        <Nav.Link onClick={() => { setShowLogoutModal(true) }} >Logout</Nav.Link>
                     </Nav>
                 </Offcanvas.Body>
             </Navbar.Offcanvas>
             {
-                showLogoutModal && 
+                showLogoutModal &&
                 <ConfirmLogoutModel
                     isShown={showLogoutModal}
-                    onHide={()=>{setShowLogoutModal(false)}}
+                    onHide={() => { setShowLogoutModal(false) }}
                 />
             }
         </>

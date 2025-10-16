@@ -30,7 +30,7 @@ export class RescheduleService {
                 )AS original_lesson,
                 COALESCE(
                     (SELECT
-                        json_agg(
+                        json_agg(s
                             json_build_object(
                             'new_lesson_id', course_lessons.id,
                             'course_name', courses.name,
@@ -46,7 +46,7 @@ export class RescheduleService {
                         WHERE course_lessons.id = reschedule_assignments.new_lesson_id
                     ),'[]'
                 )AS new_lesson
-                
+
             `)
             )
             .leftJoin('students', 'students.id', 'reschedule_assignments.student_id')

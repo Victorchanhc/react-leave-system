@@ -5,6 +5,7 @@ import { Alert, Button, Card, Form } from "react-bootstrap"
 import { AllDetails, Course } from "../services/models"
 import { useForm } from "react-hook-form"
 import { createEnrollment } from "./fetch/enrollment"
+import Link from "next/link"
 
 interface DetailsProps {
     course: Course,
@@ -43,7 +44,7 @@ export function JoinLesson(props: DetailsProps) {
                     <Card.Text>Time : {(course.lessons[0].start_time) + " - " + (course.lessons[0].end_time)}</Card.Text>
                     <Card.Text>Venue : {course.lessons[0].venue}</Card.Text>
                 </Card.Body>
-                <Button variant="outline-dark" size="sm" className="align-self-center" href="/lesson">Change</Button>
+                <Link className="btn btn-outline-dark btn-sm me-3 align-self-center" href={"/lesson"}>Change</Link>
             </div>
             <div className=" border justify-content-between rounded mx-3 mb-2 p-3 bg-light">
                 <Form onSubmit={handleSubmit(submit)} className="container-fluid">
